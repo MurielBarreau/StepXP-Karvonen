@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StepXP · Zones de fréquence cardiaque</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    --bg: #0F1E33;
+    --surface: #16294A;
+    --surface-2: #1D3459;
+    --line: #2A466F;
+    --text: #F4F7FB;
+    --text-dim: #9FB3CC;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 28px 16px 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .k-card { width: 100%; max-width: 440px; }
+  .k-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin: 0 0 2px;
+  }
+  .k-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 0 0 20px;
+  }
+  .k-field-row { display: flex; gap: 10px; margin-bottom: 10px; }
+  .k-field { flex: 1; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; }
+  .k-field label { display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
+  .k-field input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .k-field input::-webkit-outer-spin-button,
+  .k-field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+  .k-genre { display: flex; gap: 8px; margin-bottom: 22px; }
+  .k-genre button {
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text-dim);
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .k-genre button.active { background: var(--surface-2); border-color: #4FA8D8; color: var(--text); }
+
+  .k-fcmax {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+  .k-fcmax .num { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700; }
+  .k-fcmax .unit { font-size: 13px; color: var(--text-dim); }
+  .k-fcmax .desc { font-size: 12px; color: var(--text-dim); }
+
+  .k-zonebar { display: flex; height: 10px; border-radius: 3px; overflow: hidden; margin-bottom: 18px; }
+  .k-zonebar div { flex: 1; }
+
+  .k-zone {
+    display: grid;
+    grid-template-columns: 10px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .k-zone:last-child { border-bottom: none; }
+  .k-zone .chip { width: 10px; height: 10px; border-radius: 2px; }
+  .k-zone .name { font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600; }
+  .k-zone .pct { font-size: 11px; color: var(--text-dim); }
+  .k-zone .range { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 600; text-align: right; }
+  .k-zone .range span { font-size: 11px; color: var(--text-dim); font-family: 'Inter', sans-serif; font-weight: 400; }
+
+  .k-formula { margin-top: 22px; font-size: 11px; color: var(--text-dim); line-height: 1.6; }
+  .k-formula code { color: #9FB3CC; }
+</style>
+</head>
+<body>
+  <div class="k-card">
+    <p class="k-eyebrow">StepXP · Formule de Karvonen</p>
+    <h1 class="k-title">Calcule tes zones de fréquence cardiaque</h1>
+
+    <div class="k-field-row">
+      <div class="k-field">
+        <label>Âge (ans)</label>
+        <input type="number" id="age" value="16" min="10" max="25" />
+      </div>
+      <div class="k-field">
+        <label>FC repos (bpm)</label>
+        <input type="number" id="fcRepos" value="70" min="35" max="110" />
+      </div>
+    </div>
+
+    <div class="k-genre">
+      <button id="btnF" class="active">Fille — 226 − âge</button>
+      <button id="btnG">Garçon — 220 − âge</button>
+    </div>
+
+    <div class="k-fcmax">
+      <div>
+        <div class="desc">FC max estimée</div>
+        <div class="num"><span id="fcMaxVal">210</span><span class="unit"> bpm</span></div>
+      </div>
+      <div class="desc">FC réserve : <span id="reserveVal">140</span> bpm</div>
+    </div>
+
+    <div class="k-zonebar" id="zonebar"></div>
+    <div id="zones"></div>
+
+    <p class="k-formula">
+      FC max : <code>226 − âge</code> (filles) ou <code>220 − âge</code> (garçons).<br />
+      FC cible (Karvonen) : <code>FC repos + %×(FC max − FC repos)</code>.
+    </p>
+  </div>
+
+<script>
+  const ZONES = [
+    { label: "Échauffement", lo: 50, hi: 60, color: "#4FA8D8" },
+    { label: "Chill",        lo: 60, hi: 70, color: "#4FC9A6" },
+    { label: "Combo",        lo: 70, hi: 80, color: "#F2C94C" },
+    { label: "Turbo 1",      lo: 80, hi: 90, color: "#F2994A" },
+    { label: "Turbo 2",      lo: 90, hi: 100, color: "#EB5757" },
+  ];
+
+  let genre = "F";
+  const ageEl = document.getElementById("age");
+  const fcReposEl = document.getElementById("fcRepos");
+  const btnF = document.getElementById("btnF");
+  const btnG = document.getElementById("btnG");
+  const zonebarEl = document.getElementById("zonebar");
+  const zonesEl = document.getElementById("zones");
+  const fcMaxValEl = document.getElementById("fcMaxVal");
+  const reserveValEl = document.getElementById("reserveVal");
+
+  zonebarEl.innerHTML = ZONES.map(z => `<div style="background:${z.color}"></div>`).join("");
+
+  function render() {
+    const age = Number(ageEl.value) || 0;
+    const fcRepos = Number(fcReposEl.value) || 0;
+    const fcMax = genre === "F" ? 226 - age : 220 - age;
+    const reserve = Math.max(fcMax - fcRepos, 0);
+
+    fcMaxValEl.textContent = fcMax;
+    reserveValEl.textContent = reserve;
+
+    const bpmAt = (pct) => Math.round(fcRepos + reserve * (pct / 100));
+
+    zonesEl.innerHTML = ZONES.map(z => `
+      <div class="k-zone">
+        <div class="chip" style="background:${z.color}"></div>
+        <div>
+          <div class="name">${z.label}</div>
+          <div class="pct">${z.lo}% – ${z.hi}%</div>
+        </div>
+        <div class="range">${bpmAt(z.lo)}–${bpmAt(z.hi)}<br><span>bpm</span></div>
+      </div>
+    `).join("");
+  }
+
+  btnF.addEventListener("click", () => { genre = "F"; btnF.classList.add("active"); btnG.classList.remove("active"); render(); });
+  btnG.addEventListener("click", () => { genre = "G"; btnG.classList.add("active"); btnF.classList.remove("active"); render(); });
+  ageEl.addEventListener("input", render);
+  fcReposEl.addEventListener("input", render);
+
+  render();
+</script>
+</body>
+</html>
