@@ -1,199 +1,164 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>StepXP · Zones de fréquence cardiaque</title>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StepXP1</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+*{box-sizing:border-box}html,body{margin:0}
+body{--bg:#0F1E33;--s:#16294A;--s2:#1D3459;--l:#2A466F;--t:#F4F7FB;--d:#9FB3CC;font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
+.app{max-width:460px;margin:0 auto;padding:0 16px 40px}
+.hd{padding:22px 0 12px}
+.ey{font-family:Oswald,sans-serif;font-size:13px;letter-spacing:.06em;color:var(--d);margin:0 0 2px}
+h1{font-family:Oswald,sans-serif;font-weight:700;font-size:26px;margin:0}
+h2{font-family:Oswald,sans-serif;font-size:18px;font-weight:600;margin:22px 0 10px}
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 0 12px}
+.tabs button{font-family:Oswald,sans-serif;font-size:12px;font-weight:600;line-height:1.2;padding:9px 4px;border-radius:4px;border:1px solid var(--l);background:var(--s);color:var(--d);cursor:pointer}
+.tabs button.on{background:var(--s2);border-color:#4FA8D8;color:var(--t)}
+.pane{display:none}.pane.on{display:block}
+.card{background:var(--s);border:1px solid var(--l);border-radius:4px;padding:14px 16px;margin-bottom:10px}
+.card h3{font-family:Oswald,sans-serif;font-size:16px;margin:0 0 4px}
+.card p,.card li{font-size:13px;line-height:1.55;color:#D5E0EE;margin:4px 0}
+.card ul{padding-left:18px;margin:6px 0}
+.card .goal{color:var(--t);font-weight:500}
+.fr{display:flex;gap:10px;margin-bottom:10px}
+.f{flex:1;background:var(--s);border:1px solid var(--l);border-radius:4px;padding:10px 12px}
+.f label{display:block;font-size:11px;color:var(--d);margin-bottom:4px}
+.f input{width:100%;background:transparent;border:0;outline:0;color:var(--t);font-family:Oswald,sans-serif;font-size:20px;font-weight:600}
+.seg{display:flex;gap:8px;margin-bottom:14px}
+.seg button{flex:1;padding:10px 0;border-radius:4px;border:1px solid var(--l);background:var(--s);color:var(--d);font-family:Oswald,sans-serif;font-size:14px;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--s2);border-color:#4FA8D8;color:var(--t)}
+.mx{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.mx .n{font-family:Oswald,sans-serif;font-size:36px;font-weight:700}.mx small,.dim{font-size:12px;color:var(--d)}
+.bar{display:flex;height:10px;border-radius:3px;overflow:hidden;margin-bottom:12px}.bar div{flex:1}
+.z{display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--l)}
+.z:last-child{border:0}.z.lo{opacity:.4}
+.z i{width:10px;height:10px;border-radius:2px}.z b{font-family:Oswald,sans-serif;font-size:15px;font-weight:600;display:block}
+.z span{font-size:11px;color:var(--d)}.z em{font-style:normal;font-family:Oswald,sans-serif;font-size:18px;font-weight:600;text-align:right}
+.rpe{display:flex;gap:10px}.rpe .card{flex:1;text-align:center;margin:0}
+.rpe .v{font-family:Oswald,sans-serif;font-size:30px;font-weight:700}
+.row{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--l);font-size:13px;line-height:1.5}
+.row:last-child{border:0}.row b{font-family:Oswald,sans-serif;font-weight:600;color:var(--d)}
+.ck{text-align:center;border:2px solid var(--l);border-radius:4px;padding:20px 10px;margin-bottom:14px;background:var(--s)}
+.ck .ph{font-family:Oswald,sans-serif;font-size:22px;font-weight:700;letter-spacing:.04em}
+.ck .tm{font-family:Oswald,sans-serif;font-size:84px;font-weight:700;line-height:1.05}
+.ck .tg{font-family:Oswald,sans-serif;font-size:22px;font-weight:600;min-height:30px}
+.ctl{display:flex;gap:8px}.ctl button{flex:1;padding:14px 0;border-radius:4px;border:1px solid var(--l);background:var(--s2);color:var(--t);font-family:Oswald,sans-serif;font-size:16px;font-weight:600;cursor:pointer}
+.ft{text-align:center;font-size:12px;color:var(--d);margin:34px 0 0;padding-top:14px;border-top:1px solid var(--l)}
+.ctl .go{background:#4FA8D8;color:#0F1E33;border-color:#4FA8D8}
+</style></head><body><div class="app">
+<div class="hd"><p class="ey">Savoir S'entraîner Physiquement · 1ères</p><h1>StepXP1</h1></div>
+<div class="tabs" id="tabs">
+<button class="on" data-p="p1">StepXP</button><button data-p="p2">Cibles quantitatives</button><button data-p="p3">Cibles qualitatives</button><button data-p="p4">Chrono</button></div>
 
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    --bg: #0F1E33;
-    --surface: #16294A;
-    --surface-2: #1D3459;
-    --line: #2A466F;
-    --text: #F4F7FB;
-    --text-dim: #9FB3CC;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 28px 16px 40px;
-    display: flex;
-    justify-content: center;
-  }
-  .k-card { width: 100%; max-width: 440px; }
-  .k-eyebrow {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    color: var(--text-dim);
-    margin: 0 0 2px;
-  }
-  .k-title {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 1.15;
-    margin: 0 0 20px;
-  }
-  .k-field-row { display: flex; gap: 10px; margin-bottom: 10px; }
-  .k-field { flex: 1; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; }
-  .k-field label { display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
-  .k-field input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text);
-    font-family: 'Oswald', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-  }
-  .k-field input::-webkit-outer-spin-button,
-  .k-field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+<div class="pane on" id="p1">
+<p class="dim">Au travers du Savoir S'Entraîner Physiquement, tu travailles plusieurs aspects de ta pratique :</p>
+<div class="card"><h3 style="color:#4FC9A6">Flow énergétique</h3><p>Ta capacité à maintenir, sur une durée déterminée, un effort physique à intensité choisie, adapté à tes ressources.</p><p class="goal">Objectif : atteindre la cible de fourchette de FC.</p></div>
+<div class="card"><h3 style="color:#F2C94C">Technique</h3><p>La qualité de tes gestes, de tes enchaînements et de ta coordination : précis, efficaces, en sécurité et dans le tempo de la musique.</p><p class="goal">Objectif : atteindre la cible de motricité donnée par le professeur.</p></div>
+<div class="card"><h3 style="color:#4FA8D8">Coopération</h3><p>Ta capacité à travailler en équipe, à agir avec et pour les autres : soutenir psychologiquement ton steppeur, chronométrer ses séries et récupérations, et faire un retour précis sur la motricité, les indices corporels et ventilatoires qu'il donne à voir.</p></div>
+<div class="card"><h3 style="color:#F2994A">Ressentis</h3><p>Ta lucidité sur tes ressentis (corporels, respiratoires, musculaires, psychologiques) : les décrire et les analyser pour mieux réguler ton effort et comprendre les effets de ton entraînement.</p><p class="goal">Objectif : atteindre la cible de ressentis et t'en servir comme outil de pilotage.</p></div>
+<div class="card"><h3 style="color:#EB5757">Stratégie</h3><p>Ta capacité à choisir les bons paramètres et à décider de façon éclairée.</p><p class="goal">Objectif : choisir puis ajuster les paramètres pour atteindre les cibles FC, motricité et ressentis, à partir de ton état de forme et des effets sur toi.</p></div>
+<h2>Les 2 modes</h2>
+<div class="card" style="border-left:4px solid #4FC9A6"><h3>CHILL — « S'engager dans un effort prolongé et modéré »</h3><p>Tu construis ton endurance et améliores ta récupération.</p><ul><li>Endurance de base : ton cœur devient plus efficace, tes muscles utilisent mieux l'oxygène</li><li>Récupération active : ton corps recharge plus vite entre les séances intenses</li><li>Les graisses sont utilisées comme source d'énergie</li><li>Tu poses les fondations pour progresser dans les zones plus hautes</li></ul><p class="goal">Effort facile : tu peux discuter en transpirant légèrement. Sensation de confort, tu peux tenir longtemps.</p></div>
+<div class="card" style="border-left:4px solid #EB5757"><h3>TURBO — « S'engager dans des efforts brefs et intenses »</h3><p>Tu repousses tes limites et boostes ta puissance et ta vitesse.</p><ul><li>Puissance aérobie : utiliser ton oxygène à fond</li><li>Vitesse, explosivité, force de sprint</li><li>Meilleure tolérance à l'acide lactique : tu supportes mieux les efforts qui brûlent</li><li>Meilleure récupération après des efforts intenses</li></ul><p class="goal">Effort intense à très intense : tu es à fond, souffle court, muscles qui brûlent, tu ne peux plus parler.</p></div>
+</div>
 
-  .k-genre { display: flex; gap: 8px; margin-bottom: 22px; }
-  .k-genre button {
-    flex: 1;
-    padding: 10px 0;
-    border-radius: 4px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--text-dim);
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .k-genre button.active { background: var(--surface-2); border-color: #4FA8D8; color: var(--text); }
+<div class="pane" id="p2">
+<h2 style="margin-top:6px">Orbe du Flow énergétique · zones de FC</h2>
+<div class="fr"><div class="f"><label>Âge (ans)</label><input type="number" id="age" min="10" max="25"></div><div class="f"><label>FC repos (bpm)</label><input type="number" id="fc" min="35" max="110"></div></div>
+<div class="seg" id="gen"><button data-g="F">Fille — 226 − âge</button><button data-g="G">Garçon — 220 − âge</button></div>
+<div class="mx"><div><small>FC max estimée</small><div class="n"><span id="fmx">–</span> <small>bpm</small></div></div><small>FC réserve : <span id="frs">–</span> bpm</small></div>
+<div class="bar" id="bar"></div><div id="zs"></div>
+<p class="dim" style="margin-top:14px">FC cible = FC repos + % × (FC max − FC repos)</p>
+<h2>Orbe des ressentis · perception de l'effort</h2>
+<div class="rpe"><div class="card"><div class="dim">Chill</div><div class="v" style="color:#4FC9A6">2/5</div></div><div class="card"><div class="dim">Turbo</div><div class="v" style="color:#EB5757">4–5/5</div></div></div>
+</div>
 
-  .k-fcmax {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 16px 18px;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 22px;
-  }
-  .k-fcmax .num { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700; }
-  .k-fcmax .unit { font-size: 13px; color: var(--text-dim); }
-  .k-fcmax .desc { font-size: 12px; color: var(--text-dim); }
+<div class="pane" id="p3">
+<h2 style="margin-top:6px">Orbe de la technique</h2>
+<div class="card"><ul>
+<li><b>Sécurité</b> : stabilité des appuis (talon posé), articulations non verrouillées, gainage</li>
+<li><b>Dos droit</b>, regard horizontal</li>
+<li><b>Amplitude</b> / tonicité</li>
+<li><b>Fluidité</b> / continuité gestuelle (pas d'arrêts)</li>
+<li><b>Adéquation</b> mouvement / tempo musical</li></ul></div>
+<h2>Orbe des ressentis</h2>
+<div class="seg" id="rm"><button data-m="chill" class="on">Mode Chill</button><button data-m="turbo">Mode Turbo</button></div>
+<div class="card" id="rc"></div>
+</div>
 
-  .k-zonebar { display: flex; height: 10px; border-radius: 3px; overflow: hidden; margin-bottom: 18px; }
-  .k-zonebar div { flex: 1; }
-
-  .k-zone {
-    display: grid;
-    grid-template-columns: 10px 1fr auto;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .k-zone:last-child { border-bottom: none; }
-  .k-zone .chip { width: 10px; height: 10px; border-radius: 2px; }
-  .k-zone .name { font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600; }
-  .k-zone .pct { font-size: 11px; color: var(--text-dim); }
-  .k-zone .range { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 600; text-align: right; }
-  .k-zone .range span { font-size: 11px; color: var(--text-dim); font-family: 'Inter', sans-serif; font-weight: 400; }
-
-  .k-formula { margin-top: 22px; font-size: 11px; color: var(--text-dim); line-height: 1.6; }
-  .k-formula code { color: #9FB3CC; }
-</style>
-</head>
-<body>
-  <div class="k-card">
-    <p class="k-eyebrow">StepXP · Formule de Karvonen</p>
-    <h1 class="k-title">Calcule tes zones de fréquence cardiaque</h1>
-
-    <div class="k-field-row">
-      <div class="k-field">
-        <label>Âge (ans)</label>
-        <input type="number" id="age" value="16" min="10" max="25" />
-      </div>
-      <div class="k-field">
-        <label>FC repos (bpm)</label>
-        <input type="number" id="fcRepos" value="70" min="35" max="110" />
-      </div>
-    </div>
-
-    <div class="k-genre">
-      <button id="btnF" class="active">Fille — 226 − âge</button>
-      <button id="btnG">Garçon — 220 − âge</button>
-    </div>
-
-    <div class="k-fcmax">
-      <div>
-        <div class="desc">FC max estimée</div>
-        <div class="num"><span id="fcMaxVal">210</span><span class="unit"> bpm</span></div>
-      </div>
-      <div class="desc">FC réserve : <span id="reserveVal">140</span> bpm</div>
-    </div>
-
-    <div class="k-zonebar" id="zonebar"></div>
-    <div id="zones"></div>
-
-    <p class="k-formula">
-      FC max : <code>226 − âge</code> (filles) ou <code>220 − âge</code> (garçons).<br />
-      FC cible (Karvonen) : <code>FC repos + %×(FC max − FC repos)</code>.
-    </p>
-  </div>
-
+<div class="pane" id="p4">
+<div class="seg" id="cm" style="margin-top:6px"><button data-m="chill" class="on">Chrono Chill</button><button data-m="turbo">Chrono Turbo</button></div>
+<div class="ck" id="ck"><div class="ph" id="ph"></div><div class="tm" id="tm">00:00</div><div class="tg" id="tg"></div><div class="dim" id="ct"></div></div>
+<div class="ctl"><button class="go" id="go">Démarrer</button><button id="rs">Reset</button></div>
+<p class="dim" id="seq" style="margin-top:14px"></p>
+</div>
+<p class="ft">StepXP, Muriel Barreau</p>
+</div>
 <script>
-  const ZONES = [
-    { label: "Échauffement", lo: 50, hi: 60, color: "#4FA8D8" },
-    { label: "Chill",        lo: 60, hi: 70, color: "#4FC9A6" },
-    { label: "Combo",        lo: 70, hi: 80, color: "#F2C94C" },
-    { label: "Turbo 1",      lo: 80, hi: 90, color: "#F2994A" },
-    { label: "Turbo 2",      lo: 90, hi: 100, color: "#EB5757" },
-  ];
+const $=id=>document.getElementById(id);
+const Z=[["echauffement","Échauffement",50,60,"#4FA8D8"],["chill","Chill",60,70,"#4FC9A6"],["combo","Combo",70,80,"#F2C94C"],["turbo1","Turbo 1",80,90,"#F2994A"],["turbo2","Turbo 2",90,100,"#EB5757"]];
+const ZC=Object.fromEntries(Z.map(z=>[z[0],z]));
+let S={age:16,fc:70,g:"F"};
+try{Object.assign(S,JSON.parse(localStorage.getItem("stepxp1")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("stepxp1",JSON.stringify(S))}catch(e){}};
+const fmax=()=>(S.g==="F"?226:220)-(+S.age||0);
+const res=()=>Math.max(fmax()-(+S.fc||0),0);
+const bpm=p=>Math.round((+S.fc||0)+res()*p/100);
+const rng=k=>{const z=ZC[k];return bpm(z[2])+"–"+bpm(z[3])};
 
-  let genre = "F";
-  const ageEl = document.getElementById("age");
-  const fcReposEl = document.getElementById("fcRepos");
-  const btnF = document.getElementById("btnF");
-  const btnG = document.getElementById("btnG");
-  const zonebarEl = document.getElementById("zonebar");
-  const zonesEl = document.getElementById("zones");
-  const fcMaxValEl = document.getElementById("fcMaxVal");
-  const reserveValEl = document.getElementById("reserveVal");
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));
+ document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.id===b.dataset.p));scrollTo(0,0)});
 
-  zonebarEl.innerHTML = ZONES.map(z => `<div style="background:${z.color}"></div>`).join("");
+function calc(){
+ $("age").value=S.age;$("fc").value=S.fc;
+ document.querySelectorAll("#gen button").forEach(b=>b.classList.toggle("on",b.dataset.g===S.g));
+ $("fmx").textContent=fmax();$("frs").textContent=res();
+ $("bar").innerHTML=Z.map(z=>`<div style="background:${z[4]}"></div>`).join("");
+ $("zs").innerHTML=Z.map(z=>`<div class="z ${["echauffement","combo"].includes(z[0])?"lo":""}"><i style="background:${z[4]}"></i><div><b>${z[1]}</b><span>${z[2]}% – ${z[3]}%</span></div><em>${rng(z[0])}<br><small class="dim">bpm</small></em></div>`).join("");
+ show()}
+$("age").oninput=e=>{S.age=e.target.value;save();calc2()};
+$("fc").oninput=e=>{S.fc=e.target.value;save();calc2()};
+function calc2(){$("fmx").textContent=fmax();$("frs").textContent=res();
+ document.querySelectorAll("#zs .z em").forEach((el,i)=>el.firstChild.textContent=rng(Z[i][0]));show()}
+document.querySelectorAll("#gen button").forEach(b=>b.onclick=()=>{S.g=b.dataset.g;save();calc()});
 
-  function render() {
-    const age = Number(ageEl.value) || 0;
-    const fcRepos = Number(fcReposEl.value) || 0;
-    const fcMax = genre === "F" ? 226 - age : 220 - age;
-    const reserve = Math.max(fcMax - fcRepos, 0);
+const RES={chill:["2/5","#4FC9A6",[["Psychologique","Sentiment de sérénité, mentalement à l'aise"],["Musculaire","Sensation d'activation musculaire, légère chauffe musculaire"],["Respiratoire","Respiration plus profonde mais confortable, conversation en phrases complètes"],["Corporel","Température corporelle modérée, transpiration légère"]]],
+turbo:["4–5/5","#EB5757",[["Psychologique","Sentiment d'inconfort +++, volonté nécessaire"],["Musculaire","Brûlures musculaires, tensions"],["Respiratoire","Respiration haletante, bruyante, désordonnée, sensation d'asphyxie, conversation très difficile"],["Corporel","Sensation de surchauffe, transpiration +++, visage rouge et marqué"]]]};
+function rview(m){const r=RES[m];
+ document.querySelectorAll("#rm button").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
+ $("rc").innerHTML=`<div class="dim">Perception de l'effort</div><div style="font-family:Oswald;font-size:30px;font-weight:700;color:${r[1]};margin-bottom:6px">${r[0]}</div>`+r[2].map(x=>`<div class="row"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}
+document.querySelectorAll("#rm button").forEach(b=>b.onclick=()=>rview(b.dataset.m));
 
-    fcMaxValEl.textContent = fcMax;
-    reserveValEl.textContent = reserve;
+/* CHRONO */
+let mode="chill",steps=[],idx=0,left=0,end=0,run=false,tick=null,lastS=-1,ac=null,wl=null;
+function build(m){steps=[];
+ if(m==="chill"){steps.push({n:"CHILL",d:780,z:"chill",c:"Chill · 13 min"});steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})}
+ else[1,2].forEach(s=>{for(let r=1;r<=6;r++){const zk="turbo",info=`Série ${s}/2 · Répétition ${r}/6`;
+  steps.push({n:"TURBO "+s,d:30,z:zk,c:info});if(r<6)steps.push({n:"RÉCUP",d:30,c:info})}
+  if(s===1)steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})});
+ $("seq").textContent=m==="chill"?"Chill 13 min → récupération 2 min.":"Série 1 Turbo : 6 × 30 s / 30 s → récupération 2 min → Série 2 Turbo : 6 × 30 s / 30 s. Cible : zones Turbo 1 + Turbo 2 (80–100 % de la FC de réserve)."}
+function fmt(ms){const s=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function show(){const st=steps[idx];if(!st){$("ph").textContent="TERMINÉ";$("tm").textContent="00:00";$("tg").textContent="Bravo !";$("ct").textContent="";$("ck").style.borderColor="#4FC9A6";return}
+ const c=st.z==="turbo"?"#EB5757":st.z?ZC[st.z][4]:"#4FA8D8";$("ck").style.borderColor=c;$("ph").textContent=st.n;$("ph").style.color=c;
+ $("tm").textContent=fmt(run?end-Date.now():(left||st.d*1000));
+ if(st.z==="turbo")$("tg").innerHTML="Turbo 1 : "+rng("turbo1")+"<br>Turbo 2 : "+rng("turbo2")+" bpm";else $("tg").textContent=st.z?"Cible : "+rng(st.z)+" bpm":"Récupère";$("tg").style.color=st.z?c:"var(--d)";$("ct").textContent=st.c}
+function beep(f,ms){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;o.connect(g);g.connect(ac.destination);g.gain.value=.25;o.start();o.stop(ac.currentTime+ms/1000)}catch(e){}
+ try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}}
+function loop(){left=end-Date.now();
+ if(left<=0){beep(880,500);idx++;if(idx>=steps.length){stop();idx=steps.length;left=0;$("go").textContent="Démarrer";show();return}
+  left=steps[idx].d*1000;end=Date.now()+left;lastS=-1}
+ else{const s=Math.ceil(left/1000);if(s<=3&&s!==lastS){lastS=s;beep(520,120)}}show()}
+function stop(){run=false;clearInterval(tick);try{wl&&wl.release();wl=null}catch(e){}}
+$("go").onclick=async()=>{
+ if(run){left=end-Date.now();stop();$("go").textContent="Reprendre";show();return}
+ if(idx>=steps.length){build(mode);idx=0;left=0}
+ try{ac=ac||new(window.AudioContext||window.webkitAudioContext);ac.resume()}catch(e){}
+ try{wl=await navigator.wakeLock.request("screen")}catch(e){}
+ if(!left)left=steps[idx].d*1000;end=Date.now()+left;run=true;tick=setInterval(loop,200);$("go").textContent="Pause";beep(660,200);show()};
+function reset(){stop();build(mode);idx=0;left=0;$("go").textContent="Démarrer";show()}
+$("rs").onclick=reset;
+document.querySelectorAll("#cm button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;
+ document.querySelectorAll("#cm button").forEach(x=>x.classList.toggle("on",x===b));reset()});
 
-    const bpmAt = (pct) => Math.round(fcRepos + reserve * (pct / 100));
-
-    zonesEl.innerHTML = ZONES.map(z => `
-      <div class="k-zone">
-        <div class="chip" style="background:${z.color}"></div>
-        <div>
-          <div class="name">${z.label}</div>
-          <div class="pct">${z.lo}% – ${z.hi}%</div>
-        </div>
-        <div class="range">${bpmAt(z.lo)}–${bpmAt(z.hi)}<br><span>bpm</span></div>
-      </div>
-    `).join("");
-  }
-
-  btnF.addEventListener("click", () => { genre = "F"; btnF.classList.add("active"); btnG.classList.remove("active"); render(); });
-  btnG.addEventListener("click", () => { genre = "G"; btnG.classList.add("active"); btnF.classList.remove("active"); render(); });
-  ageEl.addEventListener("input", render);
-  fcReposEl.addEventListener("input", render);
-
-  render();
-</script>
-</body>
-</html>
+calc();rview("chill");build("chill");show();
+</script></body></html>
