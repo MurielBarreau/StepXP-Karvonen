@@ -61,12 +61,12 @@ h2{font-family:Rajdhani,sans-serif;font-size:20px;font-weight:700;letter-spacing
 .nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.nav button.on{color:var(--cy);font-weight:600}
 @media(prefers-reduced-motion:reduce){.orb.on,.sm.pulse{animation:none}}
 .orb{background:linear-gradient(to top,rgba(76,201,240,.55) var(--lvl,0%),transparent var(--lvl,0%)),radial-gradient(circle at 32% 28%,rgba(255,255,255,.6),rgba(120,170,255,.25) 35%,rgba(6,40,120,.95) 78%)}
-.orb.ul{border-color:var(--ye);border-width:2px}
+.orb.ul{border-color:#fff;border-width:2px}
 .xb{height:8px;border-radius:4px;background:rgba(157,178,217,.25);overflow:hidden;margin:10px 0 4px}.xb i{display:block;height:100%;background:var(--cy)}
 .hr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--ln);font-size:14px}
 .ckb{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:14px;line-height:1.4}.ckb input{width:20px;height:20px;flex:none;accent-color:#4CC9F0}
 .sel{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;font-size:14px}.sel select{background:var(--c2);color:var(--t);border:1px solid var(--ln);border-radius:8px;padding:7px;font-size:14px}
-.ts{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:20;background:var(--c2);border:2px solid var(--ye);border-radius:12px;padding:12px 16px;max-width:90%;font-weight:600;display:none;text-align:center}.ts.on{display:block;animation:fi .4s}
+.ts{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:20;background:var(--c2);border:2px solid #9DB5FF;border-radius:12px;padding:12px 16px;max-width:90%;font-weight:600;display:none;text-align:center}.ts.on{display:block;animation:fi .4s}
 @keyframes fi{from{opacity:0;transform:translate(-50%,-10px)}}
 h2{border-left:4px solid var(--hc,var(--cy));padding-left:10px}
 .pane h2:nth-of-type(2){--hc:var(--gr)}.pane h2:nth-of-type(3){--hc:var(--ye)}
@@ -74,9 +74,20 @@ h2{border-left:4px solid var(--hc,var(--cy));padding-left:10px}
 .nav button[data-p=p2].on{color:var(--ye)}.nav button[data-p=p3].on{color:var(--or)}.nav button[data-p=p4].on{color:var(--gr)}.nav button.on{box-shadow:inset 0 2px 0 currentColor}
 .orb{border:1px solid var(--ac,var(--cy));background:linear-gradient(to top,color-mix(in srgb,var(--ac,#4CC9F0) 65%,transparent) var(--lvl,0%),transparent var(--lvl,0%)),radial-gradient(circle at 32% 28%,rgba(255,255,255,.6),rgba(120,170,255,.25) 35%,rgba(6,40,120,.95) 78%)}
 .orb.on{box-shadow:0 0 0 2px var(--ac,var(--cy)),0 0 18px color-mix(in srgb,var(--ac,#4CC9F0) 60%,transparent)}
-.orb.ul{border:2px solid var(--ye)}
+.orb.ul{border:2px solid #fff;box-shadow:0 0 14px rgba(255,255,255,.55)}
 .ol.on{color:var(--ac,var(--t))}
 @keyframes pl{50%{box-shadow:0 0 0 2px var(--ac,var(--cy)),0 0 28px color-mix(in srgb,var(--ac,#4CC9F0) 90%,transparent)}}
+#rm button[data-m=chill],#cm button[data-m=chill]{border-color:#00BF63;color:#00BF63}
+#rm button[data-m=turbo],#cm button[data-m=turbo]{border-color:#FF914D;color:#FF914D}
+#rm button[data-m=chill].on,#cm button[data-m=chill].on{background:#00BF63;color:#021849}
+#rm button[data-m=turbo].on,#cm button[data-m=turbo].on{background:#FF914D;color:#021849}
+.oc{padding:0;overflow:hidden;border-top:3px solid #9DB5FF}
+.oh{display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(157,181,255,.08);border-bottom:1px solid var(--ln)}
+.oh b{flex:1;font-family:Rajdhani,sans-serif;font-size:19px}
+.oh em{font-style:normal;font-size:12px;background:var(--c2);border:1px solid var(--ln);border-radius:20px;padding:2px 9px}
+.oc .bd{padding:6px 14px 10px}
+.oi{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid #9DB5FF;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.6),rgba(6,40,120,.95) 75%);display:flex;align-items:center;justify-content:center}
+.oi svg{width:18px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 </style></head><body><div class="app">
 <div class="hd"><p class="ey">Savoir S'entraîner Physiquement · 1ères</p><h1>StepXP<span>1</span></h1></div>
 <div class="st" id="st"></div>
@@ -109,7 +120,7 @@ h2{border-left:4px solid var(--hc,var(--cy));padding-left:10px}
 <div class="ck" id="ck"><div class="sm" id="co"><svg viewBox="0 0 24 24" style="width:46%;margin:25% 27%"><path d="M2 12h5l2-6 4 12 2-6h7"/></svg></div><div class="ph" id="ph"></div><div class="tm" id="tm">00:00</div><div class="tg" id="tg"></div><div class="dim" id="ct"></div></div>
 <div class="ctl"><button class="go" id="go">Démarrer</button><button id="rs">Reset</button></div>
 <p class="dim" id="seq" style="margin-top:14px"></p>
-<h2>Carnet de séance</h2><div class="card" id="cn"></div>
+<h2>Carnet de séance</h2><div id="cn"></div>
 </div>
 <div class="ts" id="ts" role="status"></div>
 <p class="ft">StepXP, Muriel Barreau</p>
@@ -196,13 +207,13 @@ function reset(){stop();build(mode);idx=0;left=0;$("go").textContent="Démarrer"
 $("rs").onclick=reset;
 Q("#cm button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;Q("#cm button").forEach(x=>x.classList.toggle("on",x===b));reset()});
 
-const ACC={flow:"#4CC9F0",tech:"#FFCC00",ress:"#FF914D",strat:"#00BF63",coop:"#FF4D5A"};const KX="stepxp1:xp",KHI="stepxp1:hist",KEYS=["flow","tech","ress","strat","coop"];
+const ACC=Object.fromEntries(["flow","tech","ress","strat","coop"].map(k=>[k,"#9DB5FF"]));const KX="stepxp1:xp",KHI="stepxp1:hist",KEYS=["flow","tech","ress","strat","coop"];
 const TAL={flow:"Maître du flow énergétique",tech:"Expert technique",ress:"Maître des ressentis",strat:"Commandant des paramètres",coop:"Booster de progrès"};
 let curO=0,XP={flow:0,tech:0,ress:0,strat:0,coop:0},H=[];
 try{const a=JSON.parse(localStorage.getItem(KX)||"null");if(a)KEYS.forEach(k=>XP[k]=Math.max(0,+a[k]||0));const b=JSON.parse(localStorage.getItem(KHI)||"[]");if(Array.isArray(b))H=b.filter(h=>h&&h.x)}catch(e){}
 const saveX=()=>{try{localStorage.setItem(KX,JSON.stringify(XP));localStorage.setItem(KHI,JSON.stringify(H.slice(-60)))}catch(e){}};
 const tot=x=>KEYS.reduce((s,k)=>s+(+x[k]||0),0);
-function prog(k){const x=XP[k],u=x>=150;return `<div class="xb" role="img" aria-label="${x} XP sur 150"><i style="width:${Math.min(100,x/1.5)}%;background:${ACC[k]}"></i></div><p class="dim">${x} / 150 XP · ${u?'★ Talent révélé : <b style="color:#FFCC00">'+TAL[k]+'</b>':'Talent à révéler à 150 XP : <b>'+TAL[k]+'</b>'}</p>`}
+function prog(k){const x=XP[k],u=x>=150;return `<div class="xb" role="img" aria-label="${x} XP sur 150"><i style="width:${Math.min(100,x/1.5)}%;background:${ACC[k]}"></i></div><p class="dim">${x} / 150 XP · ${u?'★ Talent révélé : <b style="color:#fff">'+TAL[k]+'</b>':'Talent à révéler à 150 XP : <b>'+TAL[k]+'</b>'}</p>`}
 function toast(m){const t=$("ts");t.innerHTML=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),6000);t.onclick=()=>t.classList.remove("on")}
 function refresh(){orbs(curO);hist()}
 function hist(){const L=H.slice(-5).reverse().map(h=>`<div class="hr"><span>${String(h.d).replace(/[^0-9-]/g,"").slice(0,10)} · Chill + Turbo</span><b>+${tot(h.x)} XP</b></div>`).join("")||'<p class="dim">Aucune séance enregistrée.</p>';
@@ -215,12 +226,11 @@ const CN={flow:["Flow énergétique",["100 % de mes FC cible sont atteintes pour
 ress:["Ressentis",["J'ai atteint la cible des ressentis (perception de l'effort, ressenti psychologique, musculaire, respiratoire, corporel) pour la série 1 Chill","J'ai atteint la cible des ressentis (perception de l'effort, ressenti psychologique, musculaire, respiratoire, corporel) pour la série 2 Turbo","J'ai atteint la cible des ressentis (perception de l'effort, ressenti psychologique, musculaire, respiratoire, corporel) pour la série 3 Turbo","J'ai décrit précisément mes ressentis pour les modes Chill et Turbo"]],
 strat:["Stratégie",["Mon choix des paramètres sur la série 1 Chill, série 2 Turbo, série 3 Turbo m'a permis d'atteindre ma cible de FC","Mon choix des paramètres sur la série 1 Chill, série 2 Turbo, série 3 Turbo m'a permis d'atteindre ma cible de motricité","Mon choix des paramètres sur la série 1 Chill, série 2 Turbo, série 3 Turbo m'a permis d'atteindre ma cible de ressentis"]],
 coop:["Coopération (à valider avec ton steppeur)",["J'ai soutenu psychologiquement mon steppeur","J'ai chronométré séries et récupérations de façon fiable, avec annonces","J'ai fait un retour précis sur les 5 indicateurs"]]};
-function carnet(){let h=`<p class="dim">Chaque orbe rapporte 30 XP quand tous ses critères sont atteints. Séance : <b>13' Chill + 2 × (6 × 30'' / 30'') Turbo</b>.</p>`;
+function carnet(){let h=`<p class="dim">Chaque orbe rapporte 30 XP quand tous ses critères sont atteints.<br>Séance : <b>13' Chill + 2 × (6 × 30'' / 30'') Turbo</b></p>`;
  const TE=["Sécurité (appuis, gainage)","Dos droit, regard horizontal","Amplitude, tonicité","Fluidité, continuité","Mouvement / tempo musical"];
- KEYS.forEach(k=>{h+=`<h3 style="margin:14px 0 2px;color:${ACC[k]}">${CN[k][0]}</h3>`;
-  if(k==="tech")h+=TE.map((t,i)=>`<div class="sel"><span>${t}</span><select><option value="0">Non demandé</option><option value="1">Réalisé</option><option value="2">Pas réalisé</option></select></div>`).join("");
-  else h+=CN[k][1].map(t=>`<label class="ckb"><input type="checkbox" data-k="${k}" style="accent-color:${ACC[k]}">${t}</label>`).join("")});
- h+='<button class="btn" id="vc" style="width:100%;margin-top:14px;background:#4CC9F0;color:#021849">Valider mon carnet</button>';
+ KEYS.forEach(k=>{h+=`<div class="card oc"><div class="oh"><span class="oi"><svg viewBox="0 0 24 24">${IC[k]}</svg></span><b>${CN[k][0].split(" (")[0]}</b><em>30 XP</em></div><div class="bd">`+(k==="coop"?'<p class="dim" style="margin:6px 0 0">À valider avec ton steppeur</p>':"")+
+  (k==="tech"?TE.map(t=>`<div class="sel"><span>${t}</span><select><option value="0">Non demandé</option><option value="1">Réalisé</option><option value="2">Pas réalisé</option></select></div>`).join(""):CN[k][1].map(t=>`<label class="ckb"><input type="checkbox" data-k="${k}" style="accent-color:#9DB5FF">${t}</label>`).join(""))+"</div></div>"});
+ h+='<button class="btn" id="vc" style="width:100%;margin-top:4px;background:#4CC9F0;color:#021849">Valider mon carnet</button>';
  $("cn").innerHTML=h;$("vc").onclick=validate}
 function validate(){const x={};
  KEYS.forEach(k=>{if(k==="tech"){const v=[...Q("#cn select")].map(s=>+s.value);x.tech=v.includes(1)&&!v.includes(2)?30:0}
