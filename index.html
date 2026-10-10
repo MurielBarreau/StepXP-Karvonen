@@ -68,6 +68,15 @@ h2{font-family:Rajdhani,sans-serif;font-size:20px;font-weight:700;letter-spacing
 .sel{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;font-size:14px}.sel select{background:var(--c2);color:var(--t);border:1px solid var(--ln);border-radius:8px;padding:7px;font-size:14px}
 .ts{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:20;background:var(--c2);border:2px solid var(--ye);border-radius:12px;padding:12px 16px;max-width:90%;font-weight:600;display:none;text-align:center}.ts.on{display:block;animation:fi .4s}
 @keyframes fi{from{opacity:0;transform:translate(-50%,-10px)}}
+h2{border-left:4px solid var(--hc,var(--cy));padding-left:10px}
+.pane h2:nth-of-type(2){--hc:var(--gr)}.pane h2:nth-of-type(3){--hc:var(--ye)}
+.hd::after{content:"";display:block;height:4px;border-radius:2px;margin-top:12px;background:linear-gradient(90deg,#4CC9F0,#00BF63,#FFCC00,#FF914D,#A8040B)}
+.nav button[data-p=p2].on{color:var(--ye)}.nav button[data-p=p3].on{color:var(--or)}.nav button[data-p=p4].on{color:var(--gr)}.nav button.on{box-shadow:inset 0 2px 0 currentColor}
+.orb{border:1px solid var(--ac,var(--cy));background:linear-gradient(to top,color-mix(in srgb,var(--ac,#4CC9F0) 65%,transparent) var(--lvl,0%),transparent var(--lvl,0%)),radial-gradient(circle at 32% 28%,rgba(255,255,255,.6),rgba(120,170,255,.25) 35%,rgba(6,40,120,.95) 78%)}
+.orb.on{box-shadow:0 0 0 2px var(--ac,var(--cy)),0 0 18px color-mix(in srgb,var(--ac,#4CC9F0) 60%,transparent)}
+.orb.ul{border:2px solid var(--ye)}
+.ol.on{color:var(--ac,var(--t))}
+@keyframes pl{50%{box-shadow:0 0 0 2px var(--ac,var(--cy)),0 0 28px color-mix(in srgb,var(--ac,#4CC9F0) 90%,transparent)}}
 </style></head><body><div class="app">
 <div class="hd"><p class="ey">Savoir S'entraîner Physiquement · 1ères</p><h1>StepXP<span>1</span></h1></div>
 <div class="st" id="st"></div>
@@ -130,9 +139,9 @@ const O=[["flow","Flow énergétique","Ta capacité à maintenir, sur une durée
 ["strat","Stratégie","Ta capacité à choisir les bons paramètres et à décider de façon éclairée.","Choisir puis ajuster les paramètres pour atteindre les cibles FC, motricité et ressentis, à partir de ton état de forme et des effets sur toi.",["p2","Voir mes cibles"]]];
 function orbs(sel){curO=sel;let h='<svg class="ln" viewBox="0 0 100 100">',P=O.map((o,i)=>{const a=(-90+i*72)*Math.PI/180;return[50+36*Math.cos(a),50+36*Math.sin(a)]});
  h+=P.map(p=>`<line x1="50" y1="50" x2="${p[0]}" y2="${p[1]}" stroke="rgba(76,201,240,.3)" stroke-width=".4"/>`).join("")+`<polygon points="${P.map(p=>p.join(",")).join(" ")}" fill="none" stroke="rgba(76,201,240,.3)" stroke-width=".4"/></svg><div class="ctr">TOI</div>`;
- O.forEach((o,i)=>{const on=i===sel;h+=`<button class="orb ${on?"on":""} ${XP[o[0]]>=150?"ul":""}" style="left:${P[i][0]}%;top:${P[i][1]}%;--lvl:${Math.min(100,XP[o[0]]/1.5)}%" data-i="${i}" aria-label="${o[1]}"><svg viewBox="0 0 24 24">${IC[o[0]]}</svg></button><div class="ol ${on?"on":""}" style="left:${P[i][0]}%;top:${P[i][1]+13}%">${o[1]}</div>`});
+ O.forEach((o,i)=>{const on=i===sel;h+=`<button class="orb ${on?"on":""} ${XP[o[0]]>=150?"ul":""}" style="left:${P[i][0]}%;top:${P[i][1]}%;--lvl:${Math.min(100,XP[o[0]]/1.5)}%;--ac:${ACC[o[0]]}" data-i="${i}" aria-label="${o[1]}"><svg viewBox="0 0 24 24">${IC[o[0]]}</svg></button><div class="ol ${on?"on":""}" style="left:${P[i][0]}%;top:${P[i][1]+13}%;--ac:${ACC[o[0]]}">${o[1]}</div>`});
  $("con").innerHTML=h;Q(".orb").forEach(b=>b.onclick=()=>orbs(+b.dataset.i));
- const o=O[sel];$("od").innerHTML=`<h3>${o[1]}</h3><p>${o[2]}</p><p class="goal">Objectif : ${o[3]}</p>${prog(o[0])}<button class="btn" onclick="tab('${o[4][0]}')">${o[4][1]} →</button>`}
+ const o=O[sel];$("od").style.borderTop="4px solid "+ACC[o[0]];$("od").innerHTML=`<h3 style="color:${ACC[o[0]]}">${o[1]}</h3><p>${o[2]}</p><p class="goal">Objectif : ${o[3]}</p>${prog(o[0])}<button class="btn" onclick="tab('${o[4][0]}')">${o[4][1]} →</button>`}
 
 /* MODES */
 const M=[{n:"CHILL",c:"#00BF63",p:2,rpe:"2/5",tag:"S'engager dans un effort prolongé et modéré",fc:()=>rng("chill"),ft:"Effort facile : tu peux discuter en transpirant légèrement. Tu peux tenir longtemps.",d:["Endurance de base : ton cœur devient plus efficace, tes muscles utilisent mieux l'oxygène","Récupération active : ton corps recharge plus vite entre les séances intenses","Les graisses sont utilisées comme source d'énergie","Tu poses les fondations pour progresser dans les zones plus hautes"]},
@@ -142,7 +151,7 @@ function modes(){$("mc").innerHTML=M.map((m,i)=>`<div class="card mc"><div class
  Q("#mc .btn").forEach(b=>b.onclick=()=>{open[b.dataset.i]=!open[b.dataset.i];modes()})}
 
 /* QUANTITATIF */
-function stats(){$("st").innerHTML=`<div><small>FC MAX</small><b>${fmax()}</b> <u>bpm</u></div><div><small>FC REPOS</small><b>${+S.fc||0}</b> <u>bpm</u></div><div><small>RÉSERVE</small><b>${res()}</b> <u>bpm</u></div>`}
+function stats(){$("st").innerHTML=`<div style="border-top:3px solid #FF4D5A"><small>FC MAX</small><b>${fmax()}</b> <u>bpm</u></div><div style="border-top:3px solid #4CC9F0"><small>FC REPOS</small><b>${+S.fc||0}</b> <u>bpm</u></div><div style="border-top:3px solid #FFCC00"><small>RÉSERVE</small><b>${res()}</b> <u>bpm</u></div>`}
 function zones(){$("zb").innerHTML=Z.map(z=>`<div style="background:${z[4]}"></div>`).join("");
  $("zs").innerHTML=Z.map(z=>`<div class="z ${["echauffement","combo"].includes(z[0])?"lo":""}">${pips(z[6],z[5])}<div><b style="color:${z[5]}">${z[1]}</b><span>${z[2]}% – ${z[3]}%</span></div><em>${rng(z[0])}<small>bpm</small></em></div>`).join("")}
 $("rpe").innerHTML=`<div class="card"><div class="dim">Chill</div><div class="v" style="color:#00BF63">2/5</div>${pips(2,"#00BF63")}</div><div class="card"><div class="dim">Turbo</div><div class="v" style="color:#FF914D">4–5/5</div>${pips(5,"#FF914D")}</div>`;
@@ -162,9 +171,9 @@ Q("#rm button").forEach(b=>b.onclick=()=>rview(b.dataset.m));
 /* CHRONO */
 let mode="chill",steps=[],idx=0,left=0,end=0,run=false,tick=null,lastS=-1,ac=null,wl=null;
 function build(m){steps=[];
- if(m==="chill"){steps.push({n:"CHILL",d:780,z:"chill",c:"Chill · 13 min"});steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})}
- else[1,2].forEach(s=>{for(let r=1;r<=6;r++){const info=`Série ${s}/2 · Répétition ${r}/6`;steps.push({n:"TURBO",d:30,z:"turbo",c:info});if(r<6)steps.push({n:"RÉCUP",d:30,c:info})}if(s===1)steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})});
- $("seq").textContent=m==="chill"?"Chill 13 min → récupération 2 min.":"Série 1 Turbo : 6 × 30 s / 30 s → récupération 2 min → Série 2 Turbo : 6 × 30 s / 30 s. Cible : zones Turbo 1 + Turbo 2 (80–100 % de la FC de réserve)."}
+ if(m==="chill"){steps.push({n:"CHILL",d:780,z:"chill",c:"Série 1 · Chill 13 min"});steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})}
+ else[1,2].forEach(s=>{for(let r=1;r<=6;r++){const info=`Série ${s+1} Turbo · Répétition ${r}/6`;steps.push({n:"TURBO",d:30,z:"turbo",c:info});if(r<6)steps.push({n:"RÉCUP",d:30,c:info})}if(s===1)steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})});
+ $("seq").textContent=m==="chill"?"Série 1 Chill : 13 min → récupération 2 min.":"Série 2 Turbo : 6 × 30 s / 30 s → récupération 2 min → Série 3 Turbo : 6 × 30 s / 30 s. Cible : zones Turbo 1 + Turbo 2 (80–100 % de la FC de réserve)."}
 const fmt=ms=>{const s=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")};
 function show(){const st=steps[idx];if(!st){$("ph").textContent="TERMINÉ";$("tm").textContent="00:00";$("tg").textContent="Bravo !";$("ct").textContent="";$("ck").style.borderColor="#00BF63";$("co").classList.remove("pulse");return}
  const c=st.z==="chill"?"#00BF63":st.z?"#FF914D":"#4CC9F0";$("ck").style.borderColor=c;$("ph").textContent=st.n;$("ph").style.color=c;
@@ -185,38 +194,38 @@ $("go").onclick=async()=>{
  if(!left)left=steps[idx].d*1000;end=Date.now()+left;run=true;tick=setInterval(loop,200);$("go").textContent="Pause";beep(660,200);show()};
 function reset(){stop();build(mode);idx=0;left=0;$("go").textContent="Démarrer";show()}
 $("rs").onclick=reset;
-Q("#cm button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;Q("#cm button").forEach(x=>x.classList.toggle("on",x===b));reset();$("cmv").textContent=mode==="turbo"?"Turbo":"Chill"});
+Q("#cm button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;Q("#cm button").forEach(x=>x.classList.toggle("on",x===b));reset()});
 
-const KX="stepxp1:xp",KHI="stepxp1:hist",KEYS=["flow","tech","ress","strat","coop"];
+const ACC={flow:"#4CC9F0",tech:"#FFCC00",ress:"#FF914D",strat:"#00BF63",coop:"#FF4D5A"};const KX="stepxp1:xp",KHI="stepxp1:hist",KEYS=["flow","tech","ress","strat","coop"];
 const TAL={flow:"Maître du flow énergétique",tech:"Expert technique",ress:"Maître des ressentis",strat:"Commandant des paramètres",coop:"Booster de progrès"};
 let curO=0,XP={flow:0,tech:0,ress:0,strat:0,coop:0},H=[];
 try{const a=JSON.parse(localStorage.getItem(KX)||"null");if(a)KEYS.forEach(k=>XP[k]=Math.max(0,+a[k]||0));const b=JSON.parse(localStorage.getItem(KHI)||"[]");if(Array.isArray(b))H=b.filter(h=>h&&h.x)}catch(e){}
 const saveX=()=>{try{localStorage.setItem(KX,JSON.stringify(XP));localStorage.setItem(KHI,JSON.stringify(H.slice(-60)))}catch(e){}};
 const tot=x=>KEYS.reduce((s,k)=>s+(+x[k]||0),0);
-function prog(k){const x=XP[k],u=x>=150;return `<div class="xb" role="img" aria-label="${x} XP sur 150"><i style="width:${Math.min(100,x/1.5)}%"></i></div><p class="dim">${x} / 150 XP · ${u?'★ Talent révélé : <b style="color:#FFCC00">'+TAL[k]+'</b>':'Talent à révéler à 150 XP'}</p>`}
+function prog(k){const x=XP[k],u=x>=150;return `<div class="xb" role="img" aria-label="${x} XP sur 150"><i style="width:${Math.min(100,x/1.5)}%;background:${ACC[k]}"></i></div><p class="dim">${x} / 150 XP · ${u?'★ Talent révélé : <b style="color:#FFCC00">'+TAL[k]+'</b>':'Talent à révéler à 150 XP : <b>'+TAL[k]+'</b>'}</p>`}
 function toast(m){const t=$("ts");t.innerHTML=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),6000);t.onclick=()=>t.classList.remove("on")}
 function refresh(){orbs(curO);hist()}
-function hist(){const L=H.slice(-5).reverse().map(h=>`<div class="hr"><span>${String(h.d).replace(/[^0-9-]/g,"").slice(0,10)} · ${h.m==="turbo"?"Turbo":"Chill"}</span><b>+${tot(h.x)} XP</b></div>`).join("")||'<p class="dim">Aucune séance enregistrée.</p>';
+function hist(){const L=H.slice(-5).reverse().map(h=>`<div class="hr"><span>${String(h.d).replace(/[^0-9-]/g,"").slice(0,10)} · Chill + Turbo</span><b>+${tot(h.x)} XP</b></div>`).join("")||'<p class="dim">Aucune séance enregistrée.</p>';
  $("hist").innerHTML=`<p class="dim">XP total : <b>${tot(XP)}</b> · séances : <b>${H.length}</b></p>${L}<div class="seg" style="margin:12px 0 8px"><button id="ex">Exporter</button><button id="im">Importer</button><button id="rz">Tout effacer</button></div><input type="file" id="fi" accept="application/json" hidden><p class="dim">Tes données restent sur ton téléphone : aucun nom, aucun compte, rien n'est envoyé. Exporte-les pour les garder ou changer d'appareil.</p>`;
  $("ex").onclick=()=>{const b=new Blob([JSON.stringify({v:1,xp:XP,hist:H})],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="stepxp1-progression.json";a.click()};
  $("im").onclick=()=>$("fi").click();
  $("fi").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{const d=JSON.parse(t);if(!d||!d.xp)throw 0;KEYS.forEach(k=>XP[k]=Math.max(0,+d.xp[k]||0));H=Array.isArray(d.hist)?d.hist.filter(h=>h&&h.x).slice(-60):[];saveX();refresh();toast("Progression importée")}).catch(()=>toast("Fichier non valide"))};
  $("rz").onclick=()=>{if(confirm("Effacer toute ta progression sur cet appareil ?")){KEYS.forEach(k=>XP[k]=0);H=[];saveX();refresh()}}}
-const CN={flow:["Flow énergétique",["100 % de mes FC étaient dans la fourchette prévue"]],tech:["Technique",[]],
-ress:["Ressentis",["J'ai atteint la cible de ressentis","J'ai apprécié mes ressentis","Je les ai décrits","J'ai analysé les effets perçus / attendus"]],
-strat:["Stratégie",["J'ai choisi et ajusté mes paramètres (état de forme, effets sur moi) pour atteindre ma cible de FC","… ma cible de motricité","… ma cible de ressentis"]],
+const CN={flow:["Flow énergétique",["100 % de mes FC cible sont atteintes pour la série 1 Chill","100 % de mes FC cible sont atteintes pour la série 2 Turbo","100 % de mes FC cible sont atteintes pour la série 3 Turbo"]],tech:["Technique",[]],
+ress:["Ressentis",["J'ai atteint la cible des ressentis (perception de l'effort, ressenti psychologique, musculaire, respiratoire, corporel) pour la série 1 Chill","J'ai atteint la cible des ressentis (perception de l'effort, ressenti psychologique, musculaire, respiratoire, corporel) pour la série 2 Turbo","J'ai atteint la cible des ressentis (perception de l'effort, ressenti psychologique, musculaire, respiratoire, corporel) pour la série 3 Turbo","J'ai décrit précisément mes ressentis pour les modes Chill et Turbo"]],
+strat:["Stratégie",["Mon choix des paramètres sur la série 1 Chill, série 2 Turbo, série 3 Turbo m'a permis d'atteindre ma cible de FC","Mon choix des paramètres sur la série 1 Chill, série 2 Turbo, série 3 Turbo m'a permis d'atteindre ma cible de motricité","Mon choix des paramètres sur la série 1 Chill, série 2 Turbo, série 3 Turbo m'a permis d'atteindre ma cible de ressentis"]],
 coop:["Coopération (à valider avec ton steppeur)",["J'ai soutenu psychologiquement mon steppeur","J'ai chronométré séries et récupérations de façon fiable, avec annonces","J'ai fait un retour précis sur les 5 indicateurs"]]};
-function carnet(){let h=`<p class="dim">Chaque orbe rapporte 30 XP quand tous ses critères sont atteints. Séance : <b id="cmv">${mode==="turbo"?"Turbo":"Chill"}</b>.</p>`;
+function carnet(){let h=`<p class="dim">Chaque orbe rapporte 30 XP quand tous ses critères sont atteints. Séance : <b>13' Chill + 2 × (6 × 30'' / 30'') Turbo</b>.</p>`;
  const TE=["Sécurité (appuis, gainage)","Dos droit, regard horizontal","Amplitude, tonicité","Fluidité, continuité","Mouvement / tempo musical"];
- KEYS.forEach(k=>{h+=`<h3 style="margin:14px 0 2px;color:#4CC9F0">${CN[k][0]}</h3>`;
+ KEYS.forEach(k=>{h+=`<h3 style="margin:14px 0 2px;color:${ACC[k]}">${CN[k][0]}</h3>`;
   if(k==="tech")h+=TE.map((t,i)=>`<div class="sel"><span>${t}</span><select><option value="0">Non demandé</option><option value="1">Réalisé</option><option value="2">Pas réalisé</option></select></div>`).join("");
-  else h+=CN[k][1].map(t=>`<label class="ckb"><input type="checkbox" data-k="${k}">${t}</label>`).join("")});
+  else h+=CN[k][1].map(t=>`<label class="ckb"><input type="checkbox" data-k="${k}" style="accent-color:${ACC[k]}">${t}</label>`).join("")});
  h+='<button class="btn" id="vc" style="width:100%;margin-top:14px;background:#4CC9F0;color:#021849">Valider mon carnet</button>';
  $("cn").innerHTML=h;$("vc").onclick=validate}
 function validate(){const x={};
  KEYS.forEach(k=>{if(k==="tech"){const v=[...Q("#cn select")].map(s=>+s.value);x.tech=v.includes(1)&&!v.includes(2)?30:0}
   else x[k]=[...Q('#cn input[data-k="'+k+'"]')].every(i=>i.checked)?30:0});
- const b={...XP};KEYS.forEach(k=>XP[k]+=x[k]);H.push({d:new Date().toISOString().slice(0,10),m:mode,x});saveX();
+ const b={...XP};KEYS.forEach(k=>XP[k]+=x[k]);H.push({d:new Date().toISOString().slice(0,10),x});saveX();
  const nw=KEYS.filter(k=>b[k]<150&&XP[k]>=150);
  toast(nw.length?"★ Talent révélé : "+nw.map(k=>TAL[k]).join(", "):"Carnet enregistré : +"+tot(x)+" XP");
  carnet();refresh();tab("p1")}
