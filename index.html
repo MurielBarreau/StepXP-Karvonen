@@ -2,153 +2,168 @@
 <html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StepXP1</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 *{box-sizing:border-box}html,body{margin:0}
-body{--bg:#0F1E33;--s:#16294A;--s2:#1D3459;--l:#2A466F;--t:#F4F7FB;--d:#9FB3CC;font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
-.app{max-width:460px;margin:0 auto;padding:0 16px 40px}
-.hd{padding:22px 0 12px}
-.ey{font-family:Oswald,sans-serif;font-size:13px;letter-spacing:.06em;color:var(--d);margin:0 0 2px}
-h1{font-family:Oswald,sans-serif;font-weight:700;font-size:26px;margin:0}
-h2{font-family:Oswald,sans-serif;font-size:18px;font-weight:600;margin:22px 0 10px}
-.tabs{position:sticky;top:0;z-index:5;background:var(--bg);display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 0 12px}
-.tabs button{font-family:Oswald,sans-serif;font-size:12px;font-weight:600;line-height:1.2;padding:9px 4px;border-radius:4px;border:1px solid var(--l);background:var(--s);color:var(--d);cursor:pointer}
-.tabs button.on{background:var(--s2);border-color:#4FA8D8;color:var(--t)}
+body{--bg:#021849;--c:#0B2766;--c2:#12327A;--ln:rgba(76,201,240,.2);--t:#F2F6FF;--d:#9DB2D9;--cy:#4CC9F0;--gr:#00BF63;--ye:#FFCC00;--or:#FF914D;--rd:#A8040B;--rt:#FF4D5A;font-family:Inter,sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
+.app{max-width:460px;margin:0 auto;padding:0 16px 100px}
+.hd{padding:20px 0 10px}.ey{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--d);margin:0}
+h1{font-family:Rajdhani,sans-serif;font-weight:700;font-size:34px;margin:0;line-height:1.1}h1 span{color:var(--cy)}
+h2{font-family:Rajdhani,sans-serif;font-size:20px;font-weight:700;letter-spacing:.03em;margin:24px 0 10px}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 4px}
+.st div{background:var(--c);border:1px solid var(--ln);border-radius:10px;padding:8px 10px}
+.st small{display:block;font-size:10px;letter-spacing:.08em;color:var(--d)}.st b{font-family:Rajdhani,sans-serif;font-size:24px;font-weight:700}.st u{text-decoration:none;font-size:11px;color:var(--d);font-weight:400}
 .pane{display:none}.pane.on{display:block}
-.card{background:var(--s);border:1px solid var(--l);border-radius:4px;padding:14px 16px;margin-bottom:10px}
-.card h3{font-family:Oswald,sans-serif;font-size:16px;margin:0 0 4px}
-.card p,.card li{font-size:13px;line-height:1.55;color:#D5E0EE;margin:4px 0}
-.card ul{padding-left:18px;margin:6px 0}
-.card .goal{color:var(--t);font-weight:500}
-.fr{display:flex;gap:10px;margin-bottom:10px}
-.f{flex:1;background:var(--s);border:1px solid var(--l);border-radius:4px;padding:10px 12px}
-.f label{display:block;font-size:11px;color:var(--d);margin-bottom:4px}
-.f input{width:100%;background:transparent;border:0;outline:0;color:var(--t);font-family:Oswald,sans-serif;font-size:20px;font-weight:600}
-.seg{display:flex;gap:8px;margin-bottom:14px}
-.seg button{flex:1;padding:10px 0;border-radius:4px;border:1px solid var(--l);background:var(--s);color:var(--d);font-family:Oswald,sans-serif;font-size:14px;font-weight:600;cursor:pointer}
-.seg button.on{background:var(--s2);border-color:#4FA8D8;color:var(--t)}
-.mx{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
-.mx .n{font-family:Oswald,sans-serif;font-size:36px;font-weight:700}.mx small,.dim{font-size:12px;color:var(--d)}
-.bar{display:flex;height:10px;border-radius:3px;overflow:hidden;margin-bottom:12px}.bar div{flex:1}
-.z{display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--l)}
-.z:last-child{border:0}.z.lo{opacity:.4}
-.z i{width:10px;height:10px;border-radius:2px}.z b{font-family:Oswald,sans-serif;font-size:15px;font-weight:600;display:block}
-.z span{font-size:11px;color:var(--d)}.z em{font-style:normal;font-family:Oswald,sans-serif;font-size:18px;font-weight:600;text-align:right}
-.rpe{display:flex;gap:10px}.rpe .card{flex:1;text-align:center;margin:0}
-.rpe .v{font-family:Oswald,sans-serif;font-size:30px;font-weight:700}
-.row{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--l);font-size:13px;line-height:1.5}
-.row:last-child{border:0}.row b{font-family:Oswald,sans-serif;font-weight:600;color:var(--d)}
-.ck{text-align:center;border:2px solid var(--l);border-radius:4px;padding:20px 10px;margin-bottom:14px;background:var(--s)}
-.ck .ph{font-family:Oswald,sans-serif;font-size:22px;font-weight:700;letter-spacing:.04em}
-.ck .tm{font-family:Oswald,sans-serif;font-size:84px;font-weight:700;line-height:1.05}
-.ck .tg{font-family:Oswald,sans-serif;font-size:22px;font-weight:600;min-height:30px}
-.ctl{display:flex;gap:8px}.ctl button{flex:1;padding:14px 0;border-radius:4px;border:1px solid var(--l);background:var(--s2);color:var(--t);font-family:Oswald,sans-serif;font-size:16px;font-weight:600;cursor:pointer}
-.ft{text-align:center;font-size:12px;color:var(--d);margin:34px 0 0;padding-top:14px;border-top:1px solid var(--l)}
-.ctl .go{background:#4FA8D8;color:#0F1E33;border-color:#4FA8D8}
+.card{background:var(--c);border:1px solid var(--ln);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.card h3{font-family:Rajdhani,sans-serif;font-size:19px;margin:0 0 4px;font-weight:700}
+.card p,.card li{font-size:14px;line-height:1.55;color:#D9E4FA;margin:4px 0}.card ul{padding-left:18px;margin:6px 0}
+.goal{color:var(--t)!important;font-weight:500}
+.btn{background:var(--c2);color:var(--t);border:1px solid var(--ln);border-radius:8px;padding:9px 12px;font-family:Rajdhani,sans-serif;font-size:15px;font-weight:600;cursor:pointer}
+.con{position:relative;width:100%;max-width:340px;aspect-ratio:1;margin:8px auto 14px}
+.con svg.ln{position:absolute;inset:0;width:100%;height:100%}
+.orb{position:absolute;width:24%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(76,201,240,.5);background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.6),rgba(120,170,255,.25) 35%,rgba(6,40,120,.95) 78%);display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
+.orb svg,.sm svg{width:46%;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.orb.on{box-shadow:0 0 0 2px var(--cy),0 0 18px rgba(76,201,240,.6);animation:pl 2.8s ease-in-out infinite}
+@keyframes pl{50%{box-shadow:0 0 0 2px var(--cy),0 0 28px rgba(76,201,240,.95)}}
+.ol{position:absolute;transform:translate(-50%,0);width:30%;text-align:center;font-size:10.5px;line-height:1.15;color:var(--d)}.ol.on{color:var(--t);font-weight:600}
+.ctr{position:absolute;left:50%;top:50%;width:17%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:var(--c2);border:1px solid var(--cy);display:flex;align-items:center;justify-content:center;font-family:Rajdhani,sans-serif;font-weight:700;font-size:13px}
+.mc{padding:0;overflow:hidden}.mc .bar4{height:5px}.mc .in{padding:14px 16px}
+.mh{display:flex;justify-content:space-between;align-items:center}
+.mh h3{font-size:24px;letter-spacing:.04em;margin:0}
+.pips{display:inline-flex;align-items:flex-end;gap:3px;height:20px}.pips i{width:6px;border-radius:2px;background:rgba(157,178,217,.3)}
+.big{font-family:Rajdhani,sans-serif;font-size:34px;font-weight:700;line-height:1.1;margin:8px 0 2px}.big small{font-size:14px;color:var(--d);font-weight:500}
+.chip{display:inline-block;font-size:12px;border:1px solid var(--ln);background:var(--c2);border-radius:20px;padding:3px 10px;margin:2px 0 8px}
+.dt{display:none;margin-top:8px}.dt.on{display:block}
+.fr{display:flex;gap:10px;margin-bottom:10px}.f{flex:1;background:var(--c);border:1px solid var(--ln);border-radius:10px;padding:10px 12px}
+.f label{display:block;font-size:11px;color:var(--d);margin-bottom:2px}.f input{width:100%;background:transparent;border:0;outline:0;color:var(--t);font-family:Rajdhani,sans-serif;font-size:26px;font-weight:700}
+.seg{display:flex;gap:8px;margin-bottom:14px}.seg button{flex:1;padding:11px 0;border-radius:8px;border:1px solid var(--ln);background:var(--c);color:var(--d);font-family:Rajdhani,sans-serif;font-size:15px;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--c2);border-color:var(--cy);color:var(--t)}
+.zb{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:4px 0 8px;gap:2px}.zb div{flex:1}
+.z{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ln)}.z:last-child{border:0}.z.lo{opacity:.45}
+.z b{font-family:Rajdhani,sans-serif;font-size:18px;font-weight:700;display:block}.z span{font-size:12px;color:var(--d)}.z em{font-style:normal;font-family:Rajdhani,sans-serif;font-size:22px;font-weight:700;text-align:right}.z em small{display:block;font-size:11px;color:var(--d);font-weight:500}
+.rpe{display:flex;gap:10px}.rpe .card{flex:1;margin:0;text-align:center}.rpe .v{font-family:Rajdhani,sans-serif;font-size:36px;font-weight:700}
+.tq{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--ln);font-size:14px;line-height:1.45}.tq:last-child{border:0}
+.tq svg{flex:none;width:20px;stroke:var(--cy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.row{display:grid;grid-template-columns:100px 1fr;gap:8px;padding:9px 0;border-bottom:1px solid var(--ln);font-size:14px;line-height:1.5}.row:last-child{border:0}.row b{font-family:Rajdhani,sans-serif;font-size:15px;color:var(--d)}
+.ck{text-align:center;border:3px solid var(--cy);border-radius:14px;padding:16px 10px 18px;margin-bottom:14px;background:var(--c)}
+.ck .ph{font-family:Rajdhani,sans-serif;font-size:26px;font-weight:700;letter-spacing:.06em}
+.ck .tm{font-family:Rajdhani,sans-serif;font-size:92px;font-weight:700;line-height:1}
+.ck .tg{font-family:Rajdhani,sans-serif;font-size:24px;font-weight:700;min-height:32px;line-height:1.2}
+.sm{width:34px;height:34px;border-radius:50%;margin:0 auto 6px;border:1px solid rgba(76,201,240,.5);background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.6),rgba(6,40,120,.95) 75%)}
+.sm.pulse{animation:pl 1.2s ease-in-out infinite}
+.ctl{display:flex;gap:8px}.ctl button{flex:1;padding:15px 0;border-radius:10px;border:1px solid var(--ln);background:var(--c2);color:var(--t);font-family:Rajdhani,sans-serif;font-size:18px;font-weight:700;cursor:pointer}.ctl .go{background:var(--cy);color:var(--bg);border-color:var(--cy)}
+.dim{font-size:12px;color:var(--d)}
+.ft{text-align:center;font-size:12px;color:var(--d);margin:34px 0 0}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:9;background:rgba(2,24,73,.94);backdrop-filter:blur(8px);border-top:1px solid var(--ln);display:grid;grid-template-columns:repeat(4,1fr);max-width:460px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom)}
+.nav button{background:none;border:0;color:var(--d);padding:9px 2px 8px;font-size:10.5px;line-height:1.15;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:Inter,sans-serif}
+.nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.nav button.on{color:var(--cy);font-weight:600}
+@media(prefers-reduced-motion:reduce){.orb.on,.sm.pulse{animation:none}}
 </style></head><body><div class="app">
-<div class="hd"><p class="ey">Savoir S'entraîner Physiquement · 1ères</p><h1>StepXP1</h1></div>
-<div class="tabs" id="tabs">
-<button class="on" data-p="p1">StepXP</button><button data-p="p2">Cibles quantitatives</button><button data-p="p3">Cibles qualitatives</button><button data-p="p4">Chrono</button></div>
+<div class="hd"><p class="ey">Savoir S'entraîner Physiquement · 1ères</p><h1>StepXP<span>1</span></h1></div>
+<div class="st" id="st"></div>
 
 <div class="pane on" id="p1">
-<p class="dim">Au travers du Savoir S'Entraîner Physiquement, tu travailles plusieurs aspects de ta pratique :</p>
-<div class="card"><h3 style="color:#4FC9A6">Flow énergétique</h3><p>Ta capacité à maintenir, sur une durée déterminée, un effort physique à intensité choisie, adapté à tes ressources.</p><p class="goal">Objectif : atteindre la cible de fourchette de FC.</p></div>
-<div class="card"><h3 style="color:#F2C94C">Technique</h3><p>La qualité de tes gestes, de tes enchaînements et de ta coordination : précis, efficaces, en sécurité et dans le tempo de la musique.</p><p class="goal">Objectif : atteindre la cible de motricité donnée par le professeur.</p></div>
-<div class="card"><h3 style="color:#4FA8D8">Coopération</h3><p>Ta capacité à travailler en équipe, à agir avec et pour les autres : soutenir psychologiquement ton steppeur, chronométrer ses séries et récupérations, et faire un retour précis sur la motricité, les indices corporels et ventilatoires qu'il donne à voir.</p></div>
-<div class="card"><h3 style="color:#F2994A">Ressentis</h3><p>Ta lucidité sur tes ressentis (corporels, respiratoires, musculaires, psychologiques) : les décrire et les analyser pour mieux réguler ton effort et comprendre les effets de ton entraînement.</p><p class="goal">Objectif : atteindre la cible de ressentis et t'en servir comme outil de pilotage.</p></div>
-<div class="card"><h3 style="color:#EB5757">Stratégie</h3><p>Ta capacité à choisir les bons paramètres et à décider de façon éclairée.</p><p class="goal">Objectif : choisir puis ajuster les paramètres pour atteindre les cibles FC, motricité et ressentis, à partir de ton état de forme et des effets sur toi.</p></div>
-<h2>Les 2 modes</h2>
-<div class="card" style="border-left:4px solid #4FC9A6"><h3>CHILL — « S'engager dans un effort prolongé et modéré »</h3><p>Tu construis ton endurance et améliores ta récupération.</p><ul><li>Endurance de base : ton cœur devient plus efficace, tes muscles utilisent mieux l'oxygène</li><li>Récupération active : ton corps recharge plus vite entre les séances intenses</li><li>Les graisses sont utilisées comme source d'énergie</li><li>Tu poses les fondations pour progresser dans les zones plus hautes</li></ul><p class="goal">Effort facile : tu peux discuter en transpirant légèrement. Sensation de confort, tu peux tenir longtemps.</p></div>
-<div class="card" style="border-left:4px solid #EB5757"><h3>TURBO — « S'engager dans des efforts brefs et intenses »</h3><p>Tu repousses tes limites et boostes ta puissance et ta vitesse.</p><ul><li>Puissance aérobie : utiliser ton oxygène à fond</li><li>Vitesse, explosivité, force de sprint</li><li>Meilleure tolérance à l'acide lactique : tu supportes mieux les efforts qui brûlent</li><li>Meilleure récupération après des efforts intenses</li></ul><p class="goal">Effort intense à très intense : tu es à fond, souffle court, muscles qui brûlent, tu ne peux plus parler.</p></div>
+<h2>Tes 5 orbes</h2><div class="con" id="con"></div><div class="card" id="od"></div>
+<h2>Les 2 modes</h2><div id="mc"></div>
 </div>
 
 <div class="pane" id="p2">
-<h2 style="margin-top:6px">Orbe du Flow énergétique · zones de FC</h2>
+<h2 style="margin-top:12px">Orbe du Flow énergétique · zones de FC</h2>
 <div class="fr"><div class="f"><label>Âge (ans)</label><input type="number" id="age" min="10" max="25"></div><div class="f"><label>FC repos (bpm)</label><input type="number" id="fc" min="35" max="110"></div></div>
-<div class="seg" id="gen"><button data-g="F">Fille — 226 − âge</button><button data-g="G">Garçon — 220 − âge</button></div>
-<div class="mx"><div><small>FC max estimée</small><div class="n"><span id="fmx">–</span> <small>bpm</small></div></div><small>FC réserve : <span id="frs">–</span> bpm</small></div>
-<div class="bar" id="bar"></div><div id="zs"></div>
-<p class="dim" style="margin-top:14px">FC cible = FC repos + % × (FC max − FC repos)</p>
+<div class="seg" id="gen"><button data-g="F">Fille · 226 − âge</button><button data-g="G">Garçon · 220 − âge</button></div>
+<div class="zb" id="zb"></div><div class="card" id="zs"></div>
+<p class="dim">FC cible = FC repos + % × (FC max − FC repos)</p>
 <h2>Orbe des ressentis · perception de l'effort</h2>
-<div class="rpe"><div class="card"><div class="dim">Chill</div><div class="v" style="color:#4FC9A6">2/5</div></div><div class="card"><div class="dim">Turbo</div><div class="v" style="color:#EB5757">4–5/5</div></div></div>
+<div class="rpe" id="rpe"></div>
 </div>
 
 <div class="pane" id="p3">
-<h2 style="margin-top:6px">Orbe de la technique</h2>
-<div class="card"><ul>
-<li><b>Sécurité</b> : stabilité des appuis (talon posé), articulations non verrouillées, gainage</li>
-<li><b>Dos droit</b>, regard horizontal</li>
-<li><b>Amplitude</b> / tonicité</li>
-<li><b>Fluidité</b> / continuité gestuelle (pas d'arrêts)</li>
-<li><b>Adéquation</b> mouvement / tempo musical</li></ul></div>
+<h2 style="margin-top:12px">Orbe de la technique</h2>
+<div class="card" id="tq"></div>
 <h2>Orbe des ressentis</h2>
 <div class="seg" id="rm"><button data-m="chill" class="on">Mode Chill</button><button data-m="turbo">Mode Turbo</button></div>
 <div class="card" id="rc"></div>
 </div>
 
 <div class="pane" id="p4">
-<div class="seg" id="cm" style="margin-top:6px"><button data-m="chill" class="on">Chrono Chill</button><button data-m="turbo">Chrono Turbo</button></div>
-<div class="ck" id="ck"><div class="ph" id="ph"></div><div class="tm" id="tm">00:00</div><div class="tg" id="tg"></div><div class="dim" id="ct"></div></div>
+<div class="seg" id="cm" style="margin-top:12px"><button data-m="chill" class="on">Chrono Chill</button><button data-m="turbo">Chrono Turbo</button></div>
+<div class="ck" id="ck"><div class="sm" id="co"><svg viewBox="0 0 24 24" style="width:46%;margin:25% 27%"><path d="M2 12h5l2-6 4 12 2-6h7"/></svg></div><div class="ph" id="ph"></div><div class="tm" id="tm">00:00</div><div class="tg" id="tg"></div><div class="dim" id="ct"></div></div>
 <div class="ctl"><button class="go" id="go">Démarrer</button><button id="rs">Reset</button></div>
 <p class="dim" id="seq" style="margin-top:14px"></p>
 </div>
 <p class="ft">StepXP, Muriel Barreau</p>
 </div>
+<nav class="nav" id="nav">
+<button class="on" data-p="p1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>StepXP</button>
+<button data-p="p2"><svg viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Cibles quantitatives</button>
+<button data-p="p3"><svg viewBox="0 0 24 24"><path d="M5 7l2 2 3-3M5 15l2 2 3-3M13 8h6M13 16h6"/></svg>Cibles qualitatives</button>
+<button data-p="p4"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>Chrono</button></nav>
 <script>
-const $=id=>document.getElementById(id);
-const Z=[["echauffement","Échauffement",50,60,"#4FA8D8"],["chill","Chill",60,70,"#4FC9A6"],["combo","Combo",70,80,"#F2C94C"],["turbo1","Turbo 1",80,90,"#F2994A"],["turbo2","Turbo 2",90,100,"#EB5757"]];
+const $=id=>document.getElementById(id),Q=s=>document.querySelectorAll(s);
+const Z=[["echauffement","Échauffement",50,60,"#4CC9F0","#4CC9F0",1],["chill","Chill",60,70,"#00BF63","#00BF63",2],["combo","Combo",70,80,"#FFCC00","#FFCC00",3],["turbo1","Turbo 1",80,90,"#FF914D","#FF914D",4],["turbo2","Turbo 2",90,100,"#A8040B","#FF4D5A",5]];
 const ZC=Object.fromEntries(Z.map(z=>[z[0],z]));
-let S={age:16,fc:70,g:"F"};
-try{Object.assign(S,JSON.parse(localStorage.getItem("stepxp1")||"{}"))}catch(e){}
+let S={age:16,fc:70,g:"F"};try{Object.assign(S,JSON.parse(localStorage.getItem("stepxp1")||"{}"))}catch(e){}
 const save=()=>{try{localStorage.setItem("stepxp1",JSON.stringify(S))}catch(e){}};
-const fmax=()=>(S.g==="F"?226:220)-(+S.age||0);
-const res=()=>Math.max(fmax()-(+S.fc||0),0);
-const bpm=p=>Math.round((+S.fc||0)+res()*p/100);
-const rng=k=>{const z=ZC[k];return bpm(z[2])+"–"+bpm(z[3])};
+const fmax=()=>(S.g==="F"?226:220)-(+S.age||0),res=()=>Math.max(fmax()-(+S.fc||0),0),bpm=p=>Math.round((+S.fc||0)+res()*p/100),rng=k=>bpm(ZC[k][2])+"–"+bpm(ZC[k][3]);
+const pips=(n,c)=>`<span class="pips" role="img" aria-label="Intensité ${n} sur 5">${[1,2,3,4,5].map(i=>`<i style="height:${5+i*3}px;${i<=n?"background:"+c:""}"></i>`).join("")}</span>`;
+function tab(p){Q("#nav button").forEach(x=>x.classList.toggle("on",x.dataset.p===p));Q(".pane").forEach(x=>x.classList.toggle("on",x.id===p));scrollTo(0,0)}
+Q("#nav button").forEach(b=>b.onclick=()=>tab(b.dataset.p));
 
-document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
- document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));
- document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.id===b.dataset.p));scrollTo(0,0)});
+/* ORBES */
+const IC={flow:'<path d="M2 12h5l2-6 4 12 2-6h7"/>',tech:'<circle cx="12" cy="5" r="2"/><path d="M12 8v7M7 11l5-3 5 3M12 15l-3 5M12 15l3 5"/>',coop:'<circle cx="9" cy="12" r="4.5"/><circle cx="15" cy="12" r="4.5"/>',ress:'<path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-3 2-4 3-6 1 1 1 2 2 2 0-2 0-4 0-6z"/>',strat:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>'};
+const O=[["flow","Flow énergétique","Ta capacité à maintenir, sur une durée déterminée, un effort physique à intensité choisie, adapté à tes ressources.","Atteindre la cible de fourchette de FC.",["p2","Voir mes zones de FC"]],
+["tech","Technique","La qualité de tes gestes, de tes enchaînements et de ta coordination : précis, efficaces, en sécurité et dans le tempo de la musique.","Atteindre la cible de motricité donnée par le professeur.",["p3","Voir les critères"]],
+["coop","Coopération","Ta capacité à travailler en équipe, à agir avec et pour les autres : soutenir psychologiquement ton steppeur, chronométrer ses séries et récupérations, et faire un retour précis sur la motricité, les indices corporels et ventilatoires qu'il donne à voir.","Être un partenaire utile et précis.",["p4","Ouvrir le chrono"]],
+["ress","Ressentis","Ta lucidité sur tes ressentis (corporels, respiratoires, musculaires, psychologiques) : les décrire et les analyser pour mieux réguler ton effort et comprendre les effets de ton entraînement.","Atteindre la cible de ressentis et t'en servir comme outil de pilotage.",["p3","Voir les ressentis"]],
+["strat","Stratégie","Ta capacité à choisir les bons paramètres et à décider de façon éclairée.","Choisir puis ajuster les paramètres pour atteindre les cibles FC, motricité et ressentis, à partir de ton état de forme et des effets sur toi.",["p2","Voir mes cibles"]]];
+function orbs(sel){let h='<svg class="ln" viewBox="0 0 100 100">',P=O.map((o,i)=>{const a=(-90+i*72)*Math.PI/180;return[50+36*Math.cos(a),50+36*Math.sin(a)]});
+ h+=P.map(p=>`<line x1="50" y1="50" x2="${p[0]}" y2="${p[1]}" stroke="rgba(76,201,240,.3)" stroke-width=".4"/>`).join("")+`<polygon points="${P.map(p=>p.join(",")).join(" ")}" fill="none" stroke="rgba(76,201,240,.3)" stroke-width=".4"/></svg><div class="ctr">TOI</div>`;
+ O.forEach((o,i)=>{const on=i===sel;h+=`<button class="orb ${on?"on":""}" style="left:${P[i][0]}%;top:${P[i][1]}%" data-i="${i}" aria-label="${o[1]}"><svg viewBox="0 0 24 24">${IC[o[0]]}</svg></button><div class="ol ${on?"on":""}" style="left:${P[i][0]}%;top:${P[i][1]+13}%">${o[1]}</div>`});
+ $("con").innerHTML=h;Q(".orb").forEach(b=>b.onclick=()=>orbs(+b.dataset.i));
+ const o=O[sel];$("od").innerHTML=`<h3>${o[1]}</h3><p>${o[2]}</p><p class="goal">Objectif : ${o[3]}</p><button class="btn" onclick="tab('${o[4][0]}')">${o[4][1]} →</button>`}
 
-function calc(){
- $("age").value=S.age;$("fc").value=S.fc;
- document.querySelectorAll("#gen button").forEach(b=>b.classList.toggle("on",b.dataset.g===S.g));
- $("fmx").textContent=fmax();$("frs").textContent=res();
- $("bar").innerHTML=Z.map(z=>`<div style="background:${z[4]}"></div>`).join("");
- $("zs").innerHTML=Z.map(z=>`<div class="z ${["echauffement","combo"].includes(z[0])?"lo":""}"><i style="background:${z[4]}"></i><div><b>${z[1]}</b><span>${z[2]}% – ${z[3]}%</span></div><em>${rng(z[0])}<br><small class="dim">bpm</small></em></div>`).join("");
- show()}
-$("age").oninput=e=>{S.age=e.target.value;save();calc2()};
-$("fc").oninput=e=>{S.fc=e.target.value;save();calc2()};
-function calc2(){$("fmx").textContent=fmax();$("frs").textContent=res();
- document.querySelectorAll("#zs .z em").forEach((el,i)=>el.firstChild.textContent=rng(Z[i][0]));show()}
-document.querySelectorAll("#gen button").forEach(b=>b.onclick=()=>{S.g=b.dataset.g;save();calc()});
+/* MODES */
+const M=[{n:"CHILL",c:"#00BF63",p:2,rpe:"2/5",tag:"S'engager dans un effort prolongé et modéré",fc:()=>rng("chill"),ft:"Effort facile : tu peux discuter en transpirant légèrement. Tu peux tenir longtemps.",d:["Endurance de base : ton cœur devient plus efficace, tes muscles utilisent mieux l'oxygène","Récupération active : ton corps recharge plus vite entre les séances intenses","Les graisses sont utilisées comme source d'énergie","Tu poses les fondations pour progresser dans les zones plus hautes"]},
+{n:"TURBO",c:"#FF914D",bg:"linear-gradient(90deg,#FF914D,#A8040B)",p:5,rpe:"4–5/5",tag:"S'engager dans des efforts brefs et intenses",fc:()=>`<small>Turbo 1</small> ${rng("turbo1")} <small>· Turbo 2</small> ${rng("turbo2")}`,ft:"Effort intense à très intense : tu es à fond, souffle court, muscles qui brûlent, tu ne peux plus parler.",d:["Puissance aérobie : utiliser ton oxygène à fond","Vitesse, explosivité, force de sprint","Meilleure tolérance à l'acide lactique : tu supportes mieux les efforts qui brûlent","Meilleure récupération après des efforts intenses"]}];
+const open={};
+function modes(){$("mc").innerHTML=M.map((m,i)=>`<div class="card mc"><div class="bar4" style="background:${m.bg||m.c}"></div><div class="in"><div class="mh"><h3 style="color:${m.c}">${m.n}</h3>${pips(m.p,m.c)}</div><div class="dim">${m.tag}</div><div class="big">${m.fc()} <small>bpm</small></div><span class="chip">Effort perçu ${m.rpe}</span><p class="goal">${m.ft}</p><button class="btn" data-i="${i}">${open[i]?"Masquer":"Détails"}</button><div class="dt ${open[i]?"on":""}"><ul>${m.d.map(x=>`<li>${x}</li>`).join("")}</ul></div></div></div>`).join("");
+ Q("#mc .btn").forEach(b=>b.onclick=()=>{open[b.dataset.i]=!open[b.dataset.i];modes()})}
 
-const RES={chill:["2/5","#4FC9A6",[["Psychologique","Sentiment de sérénité, mentalement à l'aise"],["Musculaire","Sensation d'activation musculaire, légère chauffe musculaire"],["Respiratoire","Respiration plus profonde mais confortable, conversation en phrases complètes"],["Corporel","Température corporelle modérée, transpiration légère"]]],
-turbo:["4–5/5","#EB5757",[["Psychologique","Sentiment d'inconfort +++, volonté nécessaire"],["Musculaire","Brûlures musculaires, tensions"],["Respiratoire","Respiration haletante, bruyante, désordonnée, sensation d'asphyxie, conversation très difficile"],["Corporel","Sensation de surchauffe, transpiration +++, visage rouge et marqué"]]]};
-function rview(m){const r=RES[m];
- document.querySelectorAll("#rm button").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
- $("rc").innerHTML=`<div class="dim">Perception de l'effort</div><div style="font-family:Oswald;font-size:30px;font-weight:700;color:${r[1]};margin-bottom:6px">${r[0]}</div>`+r[2].map(x=>`<div class="row"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}
-document.querySelectorAll("#rm button").forEach(b=>b.onclick=()=>rview(b.dataset.m));
+/* QUANTITATIF */
+function stats(){$("st").innerHTML=`<div><small>FC MAX</small><b>${fmax()}</b> <u>bpm</u></div><div><small>FC REPOS</small><b>${+S.fc||0}</b> <u>bpm</u></div><div><small>RÉSERVE</small><b>${res()}</b> <u>bpm</u></div>`}
+function zones(){$("zb").innerHTML=Z.map(z=>`<div style="background:${z[4]}"></div>`).join("");
+ $("zs").innerHTML=Z.map(z=>`<div class="z ${["echauffement","combo"].includes(z[0])?"lo":""}">${pips(z[6],z[5])}<div><b style="color:${z[5]}">${z[1]}</b><span>${z[2]}% – ${z[3]}%</span></div><em>${rng(z[0])}<small>bpm</small></em></div>`).join("")}
+$("rpe").innerHTML=`<div class="card"><div class="dim">Chill</div><div class="v" style="color:#00BF63">2/5</div>${pips(2,"#00BF63")}</div><div class="card"><div class="dim">Turbo</div><div class="v" style="color:#FF914D">4–5/5</div>${pips(5,"#FF914D")}</div>`;
+function all(){$("age").value=S.age;$("fc").value=S.fc;Q("#gen button").forEach(b=>b.classList.toggle("on",b.dataset.g===S.g));stats();zones();modes();show()}
+$("age").oninput=e=>{S.age=e.target.value;save();all()};$("fc").oninput=e=>{S.fc=e.target.value;save();all()};
+Q("#gen button").forEach(b=>b.onclick=()=>{S.g=b.dataset.g;save();all()});
+
+/* QUALITATIF */
+const CK='<svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>';
+$("tq").innerHTML=[["Sécurité","stabilité des appuis (talon posé), articulations non verrouillées, gainage"],["Dos droit","regard horizontal"],["Amplitude","tonicité"],["Fluidité","continuité gestuelle, pas d'arrêts"],["Adéquation","mouvement / tempo musical"]].map(x=>`<div class="tq">${CK}<div><b>${x[0]}</b> · ${x[1]}</div></div>`).join("");
+const R={chill:["2/5","#00BF63",2,[["Psychologique","Sentiment de sérénité, mentalement à l'aise"],["Musculaire","Sensation d'activation musculaire, légère chauffe musculaire"],["Respiratoire","Respiration plus profonde mais confortable, conversation en phrases complètes"],["Corporel","Température corporelle modérée, transpiration légère"]]],
+turbo:["4–5/5","#FF914D",5,[["Psychologique","Sentiment d'inconfort +++, volonté nécessaire"],["Musculaire","Brûlures musculaires, tensions"],["Respiratoire","Respiration haletante, bruyante, désordonnée, sensation d'asphyxie, conversation très difficile"],["Corporel","Sensation de surchauffe, transpiration +++, visage rouge et marqué"]]]};
+function rview(m){const r=R[m];Q("#rm button").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
+ $("rc").innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><div><div class="dim">Perception de l'effort</div><div class="big" style="color:${r[1]};margin:0">${r[0]}</div></div>${pips(r[2],r[1])}</div>`+r[3].map(x=>`<div class="row"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}
+Q("#rm button").forEach(b=>b.onclick=()=>rview(b.dataset.m));
 
 /* CHRONO */
 let mode="chill",steps=[],idx=0,left=0,end=0,run=false,tick=null,lastS=-1,ac=null,wl=null;
 function build(m){steps=[];
  if(m==="chill"){steps.push({n:"CHILL",d:780,z:"chill",c:"Chill · 13 min"});steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})}
- else[1,2].forEach(s=>{for(let r=1;r<=6;r++){const zk="turbo",info=`Série ${s}/2 · Répétition ${r}/6`;
-  steps.push({n:"TURBO "+s,d:30,z:zk,c:info});if(r<6)steps.push({n:"RÉCUP",d:30,c:info})}
-  if(s===1)steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})});
+ else[1,2].forEach(s=>{for(let r=1;r<=6;r++){const info=`Série ${s}/2 · Répétition ${r}/6`;steps.push({n:"TURBO",d:30,z:"turbo",c:info});if(r<6)steps.push({n:"RÉCUP",d:30,c:info})}if(s===1)steps.push({n:"RÉCUPÉRATION",d:120,c:"Récupération · 2 min"})});
  $("seq").textContent=m==="chill"?"Chill 13 min → récupération 2 min.":"Série 1 Turbo : 6 × 30 s / 30 s → récupération 2 min → Série 2 Turbo : 6 × 30 s / 30 s. Cible : zones Turbo 1 + Turbo 2 (80–100 % de la FC de réserve)."}
-function fmt(ms){const s=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
-function show(){const st=steps[idx];if(!st){$("ph").textContent="TERMINÉ";$("tm").textContent="00:00";$("tg").textContent="Bravo !";$("ct").textContent="";$("ck").style.borderColor="#4FC9A6";return}
- const c=st.z==="turbo"?"#EB5757":st.z?ZC[st.z][4]:"#4FA8D8";$("ck").style.borderColor=c;$("ph").textContent=st.n;$("ph").style.color=c;
+const fmt=ms=>{const s=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")};
+function show(){const st=steps[idx];if(!st){$("ph").textContent="TERMINÉ";$("tm").textContent="00:00";$("tg").textContent="Bravo !";$("ct").textContent="";$("ck").style.borderColor="#00BF63";$("co").classList.remove("pulse");return}
+ const c=st.z==="chill"?"#00BF63":st.z?"#FF914D":"#4CC9F0";$("ck").style.borderColor=c;$("ph").textContent=st.n;$("ph").style.color=c;
  $("tm").textContent=fmt(run?end-Date.now():(left||st.d*1000));
- if(st.z==="turbo")$("tg").innerHTML="Turbo 1 : "+rng("turbo1")+"<br>Turbo 2 : "+rng("turbo2")+" bpm";else $("tg").textContent=st.z?"Cible : "+rng(st.z)+" bpm":"Récupère";$("tg").style.color=st.z?c:"var(--d)";$("ct").textContent=st.c}
-function beep(f,ms){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;o.connect(g);g.connect(ac.destination);g.gain.value=.25;o.start();o.stop(ac.currentTime+ms/1000)}catch(e){}
- try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}}
-function loop(){left=end-Date.now();
- if(left<=0){beep(880,500);idx++;if(idx>=steps.length){stop();idx=steps.length;left=0;$("go").textContent="Démarrer";show();return}
-  left=steps[idx].d*1000;end=Date.now()+left;lastS=-1}
- else{const s=Math.ceil(left/1000);if(s<=3&&s!==lastS){lastS=s;beep(520,120)}}show()}
+ if(st.z==="turbo")$("tg").innerHTML=`<span style="color:#FF914D">Turbo 1 : ${rng("turbo1")}</span><br><span style="color:#FF4D5A">Turbo 2 : ${rng("turbo2")} bpm</span>`;
+ else{$("tg").textContent=st.z?"Cible : "+rng(st.z)+" bpm":"Récupère";$("tg").style.color=st.z?c:"var(--d)"}
+ $("ct").textContent=st.c;$("co").classList.toggle("pulse",run&&!!st.z)}
+function beep(f,ms){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;o.connect(g);g.connect(ac.destination);g.gain.value=.25;o.start();o.stop(ac.currentTime+ms/1000)}catch(e){}try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}}
 function stop(){run=false;clearInterval(tick);try{wl&&wl.release();wl=null}catch(e){}}
+function loop(){left=end-Date.now();
+ if(left<=0){beep(880,500);idx++;if(idx>=steps.length){stop();idx=steps.length;left=0;$("go").textContent="Démarrer";show();return}left=steps[idx].d*1000;end=Date.now()+left;lastS=-1}
+ else{const s=Math.ceil(left/1000);if(s<=3&&s!==lastS){lastS=s;beep(520,120)}}show()}
 $("go").onclick=async()=>{
  if(run){left=end-Date.now();stop();$("go").textContent="Reprendre";show();return}
  if(idx>=steps.length){build(mode);idx=0;left=0}
@@ -157,8 +172,6 @@ $("go").onclick=async()=>{
  if(!left)left=steps[idx].d*1000;end=Date.now()+left;run=true;tick=setInterval(loop,200);$("go").textContent="Pause";beep(660,200);show()};
 function reset(){stop();build(mode);idx=0;left=0;$("go").textContent="Démarrer";show()}
 $("rs").onclick=reset;
-document.querySelectorAll("#cm button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;
- document.querySelectorAll("#cm button").forEach(x=>x.classList.toggle("on",x===b));reset()});
-
-calc();rview("chill");build("chill");show();
+Q("#cm button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;Q("#cm button").forEach(x=>x.classList.toggle("on",x===b));reset()});
+orbs(0);rview("chill");build("chill");all();
 </script></body></html>
