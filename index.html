@@ -126,6 +126,10 @@ h2{border-left:4px solid var(--hc,var(--cy));padding-left:10px}
 .db{border:1px solid var(--ln);border-radius:10px;overflow:hidden;margin-bottom:8px}.dh{padding:6px 12px;font-family:Rajdhani,sans-serif;font-weight:700;font-size:16px;color:#021849;background:#9DB5FF}.dbb{padding:6px 12px}
 .dr{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid var(--ln);font-size:13px;line-height:1.4}.dr:last-child{border:0}.dr b{color:var(--d);font-family:Rajdhani,sans-serif;font-size:14px}.dr2{padding:6px 0;border-bottom:1px solid var(--ln);font-size:13px;line-height:1.45}.dr2:last-child{border:0}
 .seg.wrap{flex-wrap:wrap}.seg.wrap button{flex:1 1 42%}
+body{min-height:100vh;min-height:100dvh}
+.nav{transform:translateZ(0);-webkit-transform:translateZ(0)}.kb .nav{display:none}
+.in2s{flex-wrap:wrap}.fl{flex:1 1 44%;font-size:11px;color:var(--d)}
+.stp{display:flex;align-items:center;gap:4px;margin-top:3px}.stp button{flex:none;width:38px;height:40px;border-radius:8px;border:1px solid var(--ln);background:var(--c2);color:var(--t);font-size:22px;line-height:1;cursor:pointer}.stp .in2{text-align:center;min-width:0;padding:8px 2px;margin:0}
 </style></head><body><div class="app">
 <div class="hd"><p class="ey">Savoir S'entraîner Physiquement · 1ères</p><h1>StepXP<span>1</span></h1></div>
 
@@ -299,9 +303,9 @@ const items=k=>{const P=C.plan;if(k==="flow")return P.map((p,i)=>"100 % de mes F
 function carnet(){let h=`<p class="dim">Chaque orbe rapporte 30 XP quand tous ses critères sont atteints.<br>Les cases Flow et Ressentis sont précochées d'après ma fiche d'entraînement : je peux les corriger.</p>`;
  const TE=["Sécurité (appuis, gainage)","Dos droit, regard horizontal","Amplitude, tonicité","Fluidité, continuité","Mouvement / tempo musical"];
  KEYS.forEach(k=>{h+=`<div class="card oc"><div class="oh"><span class="oi"><svg viewBox="0 0 24 24">${IC[k]}</svg></span><b>${CN[k][0].split(" (")[0]}</b><em>${k==="coop"?"10 + 20 XP":"30 XP"}</em></div><div class="bd">`+(k==="coop"?'<p class="dim" style="margin:6px 0 0">À valider avec mon steppeur</p>':"")+
-  (k==="tech"?TE.map(t=>`<div class="sel"><span>${t}</span><select><option value="0">Non demandé</option><option value="1">Réalisé</option><option value="2">Pas réalisé</option></select></div>`).join(""):items(k).map((t,j)=>`<label class="ckb"><input type="checkbox" data-k="${k}" ${pre(k,j)?"checked":""} style="accent-color:#9DB5FF">${t}</label>`).join(""))+"</div></div>"});
+  (k==="tech"?TE.map((t,i)=>`<div class="sel"><span>${t}</span><select data-tq="${i}">${["Non demandé","Réalisé","Pas réalisé"].map((o,v)=>`<option value="${v}" ${(C.tq||[])[i]===v?"selected":""}>${o}</option>`).join("")}</select></div>`).join(""):items(k).map((t,j)=>`<label class="ckb"><input type="checkbox" data-k="${k}" ${chk(k,j)?"checked":""} style="accent-color:#9DB5FF">${t}</label>`).join(""))+"</div></div>"});
  h+=`<span class="lb">Mon bilan de mon entraînement</span><textarea class="ta" id="bt" rows="4" placeholder="Réussites, fierté du jour, points à améliorer, talent déployé…">${esc(C.bil)}</textarea><button class="btn" id="vc" style="width:100%;margin-top:10px;background:#4CC9F0;color:#021849">Terminer mon entraînement</button>`;
- $("cn").innerHTML=h;$("bt").oninput=e=>{C.bil=e.target.value;saveC()};$("vc").onclick=validate}
+ $("cn").innerHTML=h;Q("#cn input[data-k]").forEach(i=>i.onchange=()=>{C.chk=C.chk||{};C.chk[i.dataset.k+"."+[...Q('#cn input[data-k="'+i.dataset.k+'"]')].indexOf(i)]=i.checked;saveC()});Q("#cn select[data-tq]").forEach(e=>e.onchange=()=>{C.tq=C.tq||[0,0,0,0,0];C.tq[+e.dataset.tq]=+e.value;saveC()});$("bt").oninput=e=>{C.bil=e.target.value;saveC()};$("vc").onclick=validate}
 function validate(){const x={};
  KEYS.forEach(k=>{if(k==="tech"){const v=[...Q("#cn select")].map(s=>+s.value);x.tech=v.includes(1)&&!v.includes(2)?30:0}
   else{const c=[...Q('#cn input[data-k="'+k+'"]')].map(i=>i.checked);x[k]=k==="coop"?(c[0]&&c[1]?10:0)+(c[2]?20:0):c.every(Boolean)?30:0}});
@@ -312,7 +316,7 @@ function validate(){const x={};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const FN=["SURBOOST","BOOST","STEADY","DIP","DRAIN"],REC=["Étirements","Jumping jacks","Corde à sauter","Pompes","Course","Burpees","Autre"];
 const fmtD=t=>{try{return new Date(t).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})}catch(e){return String(t).slice(0,16)}};
-const newC=()=>({t:new Date().toISOString(),forme:null,ech:"",plan:[{m:"Chill",n:13,w:0,r:0,g:2,off:0},{m:"Turbo",n:6,w:30,r:30,g:2,off:0},{m:"Turbo",n:6,w:30,r:30,g:0,off:0}],ent:[0,1,2].map(()=>({fc:"",rpe:0,adj:""})),blocs:[["","","",""],["","","",""],["","","",""]],par:[0,1,2].map(()=>({h:"",imp:0,lest:"",bras:0,rec:[],pas:""})),bil:"",proch:""});
+const newC=()=>({t:new Date().toISOString(),forme:null,ech:"",plan:[{m:"Chill",n:13,w:0,r:0,g:2,off:0},{m:"Turbo",n:6,w:30,r:30,g:2,off:0},{m:"Turbo",n:6,w:30,r:30,g:0,off:0}],ent:[0,1,2].map(()=>({fc:"",rpe:0,adj:""})),blocs:[["","","",""],["","","",""],["","","",""]],par:[0,1,2].map(()=>({h:"",imp:0,lest:"",bras:0,rec:[],pas:""})),bil:"",proch:"",chk:{},tq:[0,0,0,0,0]});
 let C=null,Sx=[],ph=1;const OPEN={};
 try{C=JSON.parse(localStorage.getItem("stepxp1:cur")||"null")}catch(e){}if(!C||!C.plan||!C.par||!C.ent||C.plan[0].g===undefined)C=newC();
 for(let i=C.plan.length-1;i>=0;i--)if(C.plan[i].off&&C.plan.length>1){C.plan.splice(i,1);C.par.splice(i,1);C.ent.splice(i,1)}
@@ -320,6 +324,8 @@ try{const a=JSON.parse(localStorage.getItem("stepxp1:seances")||"[]");if(Array.i
 const saveC=()=>{try{localStorage.setItem("stepxp1:cur",JSON.stringify(C))}catch(e){}};
 const saveS=()=>{try{localStorage.setItem("stepxp1:seances",JSON.stringify(Sx.slice(-80)))}catch(e){}};
 const chip=(g,v,on,l)=>`<button class="cp ${on?"on":""}" data-g="${g}" data-v="${v}">${l||v}</button>`;
+const nf=(i,k,l,mn,st,v)=>`<div class="fl">${l}<div class="stp"><button type="button" data-st="${i}|${k}|-${st}" aria-label="Moins">−</button><input class="in2" type="number" inputmode="decimal" min="${mn}" step="${st}" data-p="${i}.${k}" value="${v}"><button type="button" data-st="${i}|${k}|${st}" aria-label="Plus">+</button></div></div>`;
+const chk=(k,j)=>{const v=(C.chk||{})[k+"."+j];return v!==undefined?v:pre(k,j)};
 const SER=m=>m==="Chill"?{bg:"#00BF63",n:"Chill",t:"#021849"}:{bg:"linear-gradient(90deg,#FF914D,#A8040B)",n:"Turbo",t:"#fff"};
 const band=(i,x)=>{const z=SER(C.plan[i]?C.plan[i].m:"Turbo");return `<div class="sch" style="background:${z.bg}"><span>Série ${i+1} · ${z.n}</span><span style="color:${z.t}">${x||""}</span></div>`};
 const vcol=t=>/^✓/.test(t)?"#00BF63":"#FF4D5A";
@@ -332,7 +338,7 @@ function sview(){Q("#ph3 button").forEach(b=>b.classList.toggle("on",+b.dataset.
   Q("#sv [data-g]").forEach(b=>b.onclick=()=>{const[,i]=b.dataset.g.split(".");C.ent[+i].rpe=+b.dataset.v;saveC();sview()});return}
  let h=`<div class="dt0">Entraînement du <b>${fmtD(C.t)}</b></div><h3 class="sh3"><span class="nb">1</span>Je me situe</h3><div class="card"><div class="fm">${FN.map((n,i)=>`<button class="cp ${C.forme===i?"on":""}" data-f="${i}">${pips(5-i,"#9DB5FF")}<br>${n}</button>`).join("")}</div></div>
 <h3 class="sh3"><span class="nb">2</span>Je planifie mon entraînement</h3><div class="card"><span class="lb" style="margin-top:0">Mon échauffement</span><textarea class="ta" id="ec" rows="2" placeholder="Exercices, durée…">${esc(C.ech)}</textarea></div><span class="lb">Mon plan d'entraînement</span><p class="dim">Je peux l'adapter à mon état de forme.</p>`;
- C.plan.forEach((p,i)=>{const t=p.m==="Chill",[a,b]=zt(i+1);h+=`<div class="card sc">${band(i,"")}<div class="scb"><span class="lb" style="margin-top:2px">Type de série</span>${["Chill","Turbo"].map(x=>`<button class="cp ${p.m===x?"on":""}" data-md="${i}.${x}">${x}</button>`).join("")}<span class="chip" style="margin-left:4px">Cible FC : ${a}–${b} bpm · effort ${t?"2/5":"4–5/5"}</span><div class="in2s" style="margin-top:6px">${t?`<label>Durée (min)<input class="in2" type="number" min="1" data-p="${i}.n" value="${p.n}"></label>`:`<label>Répétitions<input class="in2" type="number" min="1" data-p="${i}.n" value="${p.n}"></label><label>Effort (s)<input class="in2" type="number" min="5" data-p="${i}.w" value="${p.w}"></label><label>Récup (s)<input class="in2" type="number" min="5" data-p="${i}.r" value="${p.r}"></label>`}<label>Récup après (min)<input class="in2" type="number" min="0" step="0.5" data-p="${i}.g" value="${p.g}"></label></div>${C.plan.length>1?`<button class="btn" data-rm="${i}" style="margin-top:8px">Retirer cette série</button>`:""}</div></div>`});
+ C.plan.forEach((p,i)=>{const t=p.m==="Chill",[a,b]=zt(i+1);h+=`<div class="card sc">${band(i,"")}<div class="scb"><span class="lb" style="margin-top:2px">Type de série</span>${["Chill","Turbo"].map(x=>`<button class="cp ${p.m===x?"on":""}" data-md="${i}.${x}">${x}</button>`).join("")}<span class="chip" style="margin-left:4px">Cible FC : ${a}–${b} bpm · effort ${t?"2/5":"4–5/5"}</span><div class="in2s" style="margin-top:6px">${t?nf(i,"n","Durée (min)",1,1,p.n):nf(i,"n","Répétitions",1,1,p.n)+nf(i,"w","Effort (s)",5,5,p.w)+nf(i,"r","Récup (s)",5,5,p.r)}${nf(i,"g","Récup après (min)",0,0.5,p.g)}</div>${C.plan.length>1?`<button class="btn" data-rm="${i}" style="margin-top:8px">Retirer cette série</button>`:""}</div></div>`});
  h+=`<div class="seg">${C.plan.length<5?'<button data-add="Chill">+ Une série Chill</button><button data-add="Turbo">+ Une série Turbo</button>':""}</div>`;
  h+='<span class="lb">Mes blocs chorégraphiques</span>';
  C.blocs.forEach((b,i)=>{h+=`<div class="card sc"><div class="sch" style="background:#9DB5FF"><span>Bloc ${i+1}${i===2?" (facultatif)":""}</span><span>4 × 8 temps</span></div><div class="scb g2">${b.map((x,j)=>`<input class="in2" data-b="${i}.${j}" value="${esc(x)}" placeholder="8 temps · ${j+1}">`).join("")}</div></div>`});
@@ -341,16 +347,17 @@ function sview(){Q("#ph3 button").forEach(b=>b.classList.toggle("on",+b.dataset.
  v.innerHTML=h;
  Q("#sv [data-f]").forEach(b=>b.onclick=()=>{C.forme=+b.dataset.f;saveC();sview()});
  $("ec").oninput=e=>{C.ech=e.target.value;saveC()};
- Q("#sv [data-p]").forEach(el=>el.oninput=()=>{const[i,k]=el.dataset.p.split(".");C.plan[+i][k]=+el.value||0;saveC();rbuild()});
- Q("#sv [data-md]").forEach(b=>b.onclick=()=>{const[i,m]=b.dataset.md.split("."),p=C.plan[+i];if(p.m===m)return;p.m=m;if(m==="Chill"){p.n=13;p.w=0;p.r=0}else{p.n=6;p.w=30;p.r=30}saveC();rbuild();sview()});
- Q("#sv [data-rm]").forEach(b=>b.onclick=()=>{const i=+b.dataset.rm;C.plan.splice(i,1);C.par.splice(i,1);C.ent.splice(i,1);saveC();rbuild();sview()});
- Q("#sv [data-add]").forEach(b=>b.onclick=()=>{const m=b.dataset.add;C.plan.push(m==="Chill"?{m,n:13,w:0,r:0,g:2,off:0}:{m,n:6,w:30,r:30,g:2,off:0});C.par.push({h:"",imp:0,lest:"",bras:0,rec:[],pas:""});C.ent.push({fc:"",rpe:0,adj:"",desc:""});saveC();rbuild();sview()});
+ Q("#sv [data-p]").forEach(el=>{const[i,k]=el.dataset.p.split("."),mn=+el.min||0;el.oninput=()=>{const v=parseFloat(el.value);if(!isNaN(v)&&v>=mn){C.plan[+i][k]=v;saveC();rbuild()}};el.onchange=()=>{const v=parseFloat(el.value);if(isNaN(v)||v<mn)el.value=C.plan[+i][k]}});
+ Q("#sv [data-st]").forEach(b=>b.onclick=()=>{const[i,k,d]=b.dataset.st.split("|"),el=b.parentNode.querySelector("input"),mn=+el.min||0,v=Math.max(mn,Math.round((parseFloat(el.value||0)+parseFloat(d))*10)/10);el.value=v;C.plan[+i][k]=v;saveC();rbuild()});
+ Q("#sv [data-md]").forEach(b=>b.onclick=()=>{const[i,m]=b.dataset.md.split("."),p=C.plan[+i];if(p.m===m)return;C.chk={};p.m=m;if(m==="Chill"){p.n=13;p.w=0;p.r=0}else{p.n=6;p.w=30;p.r=30}saveC();rbuild();sview()});
+ Q("#sv [data-rm]").forEach(b=>b.onclick=()=>{const i=+b.dataset.rm;C.plan.splice(i,1);C.par.splice(i,1);C.ent.splice(i,1);C.chk={};saveC();rbuild();sview()});
+ Q("#sv [data-add]").forEach(b=>b.onclick=()=>{const m=b.dataset.add;C.plan.push(m==="Chill"?{m,n:13,w:0,r:0,g:2,off:0}:{m,n:6,w:30,r:30,g:2,off:0});C.par.push({h:"",imp:0,lest:"",bras:0,rec:[],pas:""});C.ent.push({fc:"",rpe:0,adj:"",desc:""});C.chk={};saveC();rbuild();sview()});
  Q("#sv [data-b]").forEach(el=>el.oninput=()=>{const[i,j]=el.dataset.b.split(".");C.blocs[+i][+j]=el.value;saveC()});
  Q("#sv [data-t]").forEach(el=>el.oninput=()=>{C.par[+el.dataset.t].pas=el.value;saveC()});
  Q("#sv [data-g]").forEach(b=>b.onclick=()=>{const[,i,k]=b.dataset.g.split("."),q=C.par[+i],x=b.dataset.v;
   if(k==="rec"){const j=q.rec.indexOf(x);j<0?q.rec.push(x):q.rec.splice(j,1)}else if(k==="imp"||k==="bras")q[k]=q[k]?0:1;else q[k]=q[k]===x?"":x;saveC();sview()})}
 Q("#ph3 button").forEach(b=>b.onclick=()=>{ph=+b.dataset.s;sview()});
-function endSeance(x){C.bil=($("bt")||{}).value||C.bil;C.ent.forEach((e,i)=>{[e.lo,e.hi]=zt(i+1)});Sx.push({...C,x,id:Date.now()});saveS();C=newC();saveC();ph=1;sview();lst();reset()}
+function endSeance(x){C.bil=($("bt")||{}).value||C.bil;C.ent.forEach((e,i)=>{[e.lo,e.hi]=zt(i+1)});{const R={...C,x,id:Date.now()};delete R.chk;delete R.tq;Sx.push(R)}saveS();C=newC();saveC();ph=1;sview();lst();reset()}
 function sLines(s){const o=[],A=(k,t,x)=>o.push(Object.assign({k,t},x||{}));
  A("t","StepXP1 - Mon carnet d'entraînement",{u:"Élève : "+(who()||"non renseigné")+"   |   Entraînement du "+fmtD(s.t)});
  A("r","État de forme",{v:s.forme!=null?FN[s.forme]:"-"});A("r","XP",{v:tot(s.x)+" / 150"});
@@ -427,5 +434,8 @@ const who=()=>(String(S.pn||"")+" "+String(S.nm||"")).trim();
 const needName=()=>{if(String(S.pn||"").trim()&&String(S.nm||"").trim())return false;toast("Je renseigne mon prénom et mon nom dans l'onglet Carnet avant d'envoyer");tab("p5");return true};
 function prof(){$("pn").value=S.pn||"";$("nm").value=S.nm||""}
 $("pn").oninput=e=>{S.pn=e.target.value;save()};$("nm").oninput=e=>{S.nm=e.target.value;save()};
+const isF=n=>n&&/^(INPUT|TEXTAREA|SELECT)$/.test(n.tagName)&&n.type!=="checkbox"&&n.type!=="file";
+addEventListener("focusin",e=>{if(isF(e.target))document.body.classList.add("kb")});
+addEventListener("focusout",()=>setTimeout(()=>{if(!isF(document.activeElement))document.body.classList.remove("kb")},200));
 orbs(0);rview("chill");cmRender();build(mode);all();sview();lst();hist();fres();prof();
 </script></body></html>
