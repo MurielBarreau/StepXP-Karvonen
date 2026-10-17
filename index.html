@@ -137,6 +137,12 @@ body{min-height:100vh;min-height:100dvh}
 .sub{border:1px solid #9DB5FF;border-radius:12px;margin:12px 0;overflow:hidden;background:rgba(157,181,255,.06)}
 .subh{background:#9DB5FF;color:#021849;font-family:Rajdhani,sans-serif;font-weight:700;font-size:17px;padding:7px 14px}.subb{padding:10px 12px 4px}.subb .card{margin-bottom:10px}
 .reqt{color:#FF4D5A;font-size:11px;font-weight:600;font-family:Inter,sans-serif}.rq{outline:2px solid #FF4D5A;border-radius:10px;padding:4px}.ta.req{border-color:#FF4D5A;box-shadow:0 0 0 1px #FF4D5A}
+.hrt{position:absolute;left:50%;top:50%;width:29%;transform:translate(-50%,-50%);background:none;border:0;padding:0;cursor:pointer;animation:lub var(--bt,.86s) ease-in-out infinite}
+.hrt::before{content:"";position:absolute;inset:14%;border-radius:50%;box-shadow:0 0 26px 8px rgba(255,145,77,.32);z-index:-1}
+.hrt svg{display:block;width:100%;height:auto}.hrt.on::before{box-shadow:0 0 28px 10px rgba(255,255,255,.45)}
+.hrt .hl{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:2px;font-family:Rajdhani,sans-serif;font-weight:700;font-size:14px;letter-spacing:.08em;color:var(--t)}
+@keyframes lub{0%,50%,100%{transform:translate(-50%,-50%) scale(1)}12%{transform:translate(-50%,-50%) scale(1.09)}36%{transform:translate(-50%,-50%) scale(1.05)}}
+@media(prefers-reduced-motion:reduce){.hrt{animation:none!important}}
 </style></head><body><div class="app">
 <div class="hd"><p class="ey">Savoir S'entraîner Physiquement · 1ères</p><h1>StepXP<span>1</span></h1></div>
 
@@ -203,9 +209,9 @@ const O=[["flow","Flow énergétique","Ma capacité à maintenir, sur une durée
 ["ress","Ressentis","Ma lucidité sur mes ressentis (corporels, respiratoires, musculaires, psychologiques) : les décrire et les analyser pour mieux réguler mon effort et comprendre les effets de mon entraînement.","Atteindre la cible de ressentis et m'en servir comme outil de pilotage.",["p3","Voir les ressentis"]],
 ["strat","Stratégie","Ma capacité à choisir les bons paramètres et à décider de façon éclairée.","Choisir puis ajuster les paramètres pour atteindre les cibles FC, motricité et ressentis, à partir de mon état de forme et des effets sur moi.",null]];
 function orbs(sel){curO=sel;let h='<svg class="ln" viewBox="0 0 100 100">',P=O.map((o,i)=>{const a=(-90+i*72)*Math.PI/180;return[50+36*Math.cos(a),50+36*Math.sin(a)]});
- h+=P.map(p=>`<line x1="50" y1="50" x2="${p[0]}" y2="${p[1]}" stroke="rgba(76,201,240,.3)" stroke-width=".4"/>`).join("")+`<polygon points="${P.map(p=>p.join(",")).join(" ")}" fill="none" stroke="rgba(76,201,240,.3)" stroke-width=".4"/></svg><div class="ctr">MOI</div>`;
+ h+=P.map(p=>`<line x1="50" y1="50" x2="${p[0]}" y2="${p[1]}" stroke="rgba(76,201,240,.3)" stroke-width=".4"/>`).join("")+`<polygon points="${P.map(p=>p.join(",")).join(" ")}" fill="none" stroke="rgba(76,201,240,.3)" stroke-width=".4"/></svg><button class="hrt" id="hrt" aria-label="Moi : mes sensations, mes émotions, mon énergie ressentie"><svg viewBox="128 118 124 128" aria-hidden="true"><defs><linearGradient id="hg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4CC9F0"/><stop offset=".3" stop-color="#00BF63"/><stop offset=".55" stop-color="#FFCC00"/><stop offset=".78" stop-color="#FF914D"/><stop offset="1" stop-color="#A8040B"/></linearGradient></defs><path d="M190 238 C150 205 138 178 138 160 C138 140 152 128 168 128 C180 128 188 134 190 144 C192 134 200 128 212 128 C228 128 242 140 242 160 C242 178 230 205 190 238 Z" fill="url(#hg2)" stroke="#fff" stroke-opacity=".7" stroke-width="1.5"/><path d="M152 150 C152 140 160 134 170 135" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/><path d="M148 188 L170 188 L180 166 L192 210 L202 178 L208 188 L234 188" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">MOI</span></button>`;
  O.forEach((o,i)=>{const on=i===sel;h+=`<button class="orb ${on?"on":""} ${XP[o[0]]>=150?"ul":""}" style="left:${P[i][0]}%;top:${P[i][1]}%;--lvl:${Math.min(100,XP[o[0]]/1.5)}%;--ac:${ACC[o[0]]};--d:${i*.8}s" data-i="${i}" aria-label="${o[1]}"><svg viewBox="0 0 24 24">${IC[o[0]]}</svg></button><div class="ol ${on?"on":""}" style="left:${P[i][0]}%;top:${P[i][1]+13}%;--ac:${ACC[o[0]]}">${o[1]}</div>`});
- $("con").innerHTML=h;Q(".orb").forEach(b=>b.onclick=()=>orbs(+b.dataset.i));
+ $("con").innerHTML=h;$("hrt").onclick=showHeart;Q(".orb").forEach(b=>b.onclick=()=>orbs(+b.dataset.i));
  const o=O[sel];$("od").style.borderTop="4px solid "+ACC[o[0]];$("od").innerHTML=`<h3 style="color:${ACC[o[0]]}">${o[1]}</h3><p>${o[2]}</p><p class="goal">Objectif : ${o[3]}</p>${prog(o[0])}${o[4]?`<button class="btn" onclick="tab('${o[4][0]}')">${o[4][1]} →</button>`:""}`}
 
 /* MODES */
@@ -220,7 +226,7 @@ function stats(){}
 function zones(){$("zb").innerHTML=Z.map(z=>`<div style="background:${z[4]}"></div>`).join("");
  $("zs").innerHTML=Z.map(z=>`<div class="z ${["echauffement","combo"].includes(z[0])?"lo":""}">${pips(z[6],z[5])}<div><b style="color:${z[5]}">${z[1]}</b><span>${z[2]}% – ${z[3]}%</span></div><em>${rng(z[0])}<small>bpm</small></em></div>`).join("")}
 $("rpe").innerHTML=M.map((m,i)=>{const t=i===0;return `<div class="card mc" style="margin:0;border-color:${m.c};background:linear-gradient(165deg,${t?"rgba(0,191,99,.30)":"rgba(255,145,77,.26)"},${t?"#0B2766":"rgba(168,4,11,.22)"} 78%)"><div class="mb" style="background:${m.bg||m.c}"><h3 style="font-size:20px">${m.n}</h3>${pips(m.p,t?"#021849":"#fff")}</div><div class="in"><div class="big" style="color:${m.c};margin:0">${m.rpe}</div><div class="dim">Perception de l'effort</div></div></div>`}).join("");
-function all(){$("age").value=S.age;$("fc").value=S.fc;Q("#gen button").forEach(b=>b.classList.toggle("on",b.dataset.g===S.g));stats();zones();modes();rview();show()}
+function all(){beat();$("age").value=S.age;$("fc").value=S.fc;Q("#gen button").forEach(b=>b.classList.toggle("on",b.dataset.g===S.g));stats();zones();modes();rview();show()}
 $("age").oninput=e=>{S.age=e.target.value;save();all()};$("fc").oninput=e=>{S.fc=e.target.value;save();all()};
 Q("#gen button").forEach(b=>b.onclick=()=>{S.g=b.dataset.g;save();all()});
 
@@ -445,6 +451,14 @@ $("ib").onclick=()=>{if(dip){dip.prompt();dip=null;$("ib").style.display="none"}
 try{if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)$("inst").style.display="none"}catch(e){}
 try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
 if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+const beat=()=>{const f=Math.max(40,Math.min(120,+S.fc||70));document.documentElement.style.setProperty("--bt",(60/f).toFixed(2)+"s")};
+function showHeart(){Q(".orb").forEach(o=>o.classList.remove("on"));Q(".ol").forEach(o=>o.classList.remove("on"));$("hrt").classList.add("on");
+ const L=Sx[Sx.length-1];let h='<h3 style="color:#fff">Mon vécu</h3><p>Mes sensations, mes émotions, mon énergie ressentie : le cœur de mon entraînement.</p>';
+ if(L){const d=(L.ent||[]).find(e=>e.desc&&String(e.desc).trim());h+=`<div class="dr"><b>Dernier</b><span>Séance du ${fmtD(L.t)}</span></div><div class="dr"><b>État de forme</b><span>${L.forme!=null?FN[L.forme]:"-"}</span></div>`+(d?`<div class="dr"><b>Ressentis</b><span>« ${esc(String(d.desc).slice(0,160))}${String(d.desc).length>160?"…":""} »</span></div>`:"")}
+ else h+='<p class="dim">Après mon premier entraînement, je retrouve ici mon état de forme et mes ressentis.</p>';
+ if(C.forme!=null)h+=`<div class="dr"><b>Aujourd'hui</b><span>${FN[C.forme]}</span></div>`;
+ h+='<button class="btn" onclick="tab(\'p5\')" style="margin-top:8px">Ouvrir mon carnet →</button>';
+ $("od").style.borderTop="4px solid #FF4D5A";$("od").innerHTML=h}
 const who=()=>(String(S.pn||"")+" "+String(S.nm||"")).trim();
 const needName=()=>{if(String(S.pn||"").trim()&&String(S.nm||"").trim())return false;toast("Je renseigne mon prénom et mon nom dans l'onglet Carnet avant d'envoyer");tab("p5");return true};
 function prof(){$("pn").value=S.pn||"";$("nm").value=S.nm||""}
