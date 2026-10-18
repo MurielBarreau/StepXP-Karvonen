@@ -143,6 +143,13 @@ body{min-height:100vh;min-height:100dvh}
 .hrt .hl{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:2px;font-family:Rajdhani,sans-serif;font-weight:700;font-size:14px;letter-spacing:.08em;color:var(--t)}
 @keyframes lub{0%,50%,100%{transform:translate(-50%,-50%) scale(1)}12%{transform:translate(-50%,-50%) scale(1.09)}36%{transform:translate(-50%,-50%) scale(1.05)}}
 @media(prefers-reduced-motion:reduce){.hrt{animation:none!important}}
+.lnks{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 10px}.lnk{background:none;border:0;padding:4px 0;color:var(--d);font:13px system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:underline;cursor:pointer}
+.hp[hidden]{display:none}.hp h4{font-family:Rajdhani,sans-serif;font-size:17px;margin:8px 0 2px;color:#9DB5FF}.hp h4:first-child{margin-top:0}.hp ul{padding-left:18px;margin:4px 0}.hp li{font-size:13px;line-height:1.5;margin:5px 0;color:#D9E4FA}
+#fres .seg button{padding:14px 6px;font-size:17px;border-width:2px}
+#fres .seg button[data-m=chill]{border-color:#00BF63;color:#00BF63}#fres .seg button[data-m=turbo]{border-color:#FF914D;color:#FF914D}
+#fres .seg button[data-m=chill].on{background:#00BF63;color:#021849}#fres .seg button[data-m=turbo].on{background:#FF914D;color:#021849}
+#fsv{font-size:19px!important;padding:15px 10px!important}
+.ibub{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom));max-width:436px;margin:0 auto;z-index:9;background:var(--c2);border:2px solid #4CC9F0;border-radius:16px;padding:12px 12px 12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.45);font-size:13px;line-height:1.4}.ibub[hidden]{display:none}.ibub .btn{flex:none;background:#4CC9F0;color:#021849;border-color:#4CC9F0}.ibub .x{flex:none;background:none;border:0;color:var(--d);font-size:24px;line-height:1;cursor:pointer}.kb .ibub{display:none}
 </style></head><body><div class="app">
 <div class="hd"><p class="ey">Savoir S'entraîner Physiquement · 1ères</p><h1>StepXP<span>1</span></h1></div>
 
@@ -171,7 +178,12 @@ body{min-height:100vh;min-height:100dvh}
 <div class="ck" id="ck"><div class="sm" id="co"><svg viewBox="0 0 24 24" style="width:46%;margin:25% 27%"><path d="M2 12h5l2-6 4 12 2-6h7"/></svg></div><div class="ph" id="ph"></div><div class="tm" id="tm">00:00</div><div class="tg" id="tg"></div><div class="dim" id="ct"></div><div class="dim" id="pr" style="margin-top:6px;color:#E4ECFF"></div></div>
 <div class="ctl"><button class="go" id="go">Démarrer</button><button id="rs">Reset</button></div>
 <p class="dim" id="seq" style="margin-top:14px"></p></section>
-<section class="sec sC"><h2>Ma FC</h2><p class="dim">Mon partenaire compte mes pulsations pendant 15 s (poignet ou cou, deux doigts, sans appuyer fort, pas avec le pouce) et on multiplie par 4. Je commence à compter au bip, dès la fin de ma série.</p>
+<section class="sec sC"><h2>Ma fréquence cardiaque</h2><p class="dim">Mon partenaire compte mes pulsations pendant 15 secondes, à partir du bip, dès la fin de ma série. Il saisit le nombre compté : l'application calcule ma FC, la compare à ma cible et l'enregistre dans la série choisie.</p>
+<div class="lnks"><button type="button" class="lnk" id="how" aria-expanded="false">Comment prendre ma FC</button><button type="button" class="lnk" id="vig" aria-expanded="false">Points de vigilance</button></div>
+<div class="card hp" id="hw" hidden><h4>Au cou (artère carotide)</h4><ul><li><b>Le repère central :</b> placer l'index et le majeur au milieu de la gorge, directement sur le cartilage de la boîte vocale (le larynx). C'est la zone la plus ferme au centre du cou, juste au-dessus de la trachée.</li><li><b>Le glissement :</b> faire glisser les doigts d'environ 2 centimètres vers la gauche ou vers la droite, pour descendre dans le creux souple situé juste avant le gros muscle oblique du cou (qui s'active quand on tourne la tête).</li><li><b>La pression :</b> exercer une pression très légère vers l'arrière pour percevoir la pulsation.</li></ul>
+<h4>Au poignet (artère radiale)</h4><p class="dim">Cette méthode ne dépend d'aucune variation anatomique liée au genre et reste la plus simple.</p><ul><li><b>La position :</b> tourner la paume de la main vers le ciel et relâcher complètement le poignet.</li><li><b>Le repère :</b> repérer la ligne des tendons au centre du poignet. Placer les doigts dans la gouttière (le creux) située entre ces tendons et l'os du bord extérieur, du côté de la base du pouce.</li><li><b>La pression :</b> appuyer délicatement vers le bas pour sentir l'artère battre contre l'os.</li></ul></div>
+<div class="card hp" id="vw" hidden><h4>Au cou</h4><ul><li><b>Un seul côté à la fois :</b> ne jamais presser les deux côtés du cou en même temps, pour éviter un malaise ou une chute de tension.</li><li><b>Rester à mi-hauteur :</b> ne pas monter les doigts sous l'angle de la mâchoire. Rester au milieu de la hauteur du cou pour ne pas stimuler les capteurs de tension nerveuse.</li><li><b>Pas de palpation en cas d'antécédents :</b> en cas de problèmes vasculaires connus au niveau du cou (cholestérol, sténose), utiliser exclusivement le poignet.</li></ul>
+<h4>Au poignet</h4><ul><li><b>Garder le poignet souple :</b> ne pas casser le poignet en arrière, cela tend les tissus et bloque la perception du pouls.</li><li><b>Ne pas chercher au centre :</b> appuyer directement sur les tendons rigides au milieu du poignet ne permet rien de sentir. Se décaler vers le pouce.</li></ul></div>
 <div class="card" style="text-align:center"><div class="big" id="ft">15</div><button class="btn" id="fgo" style="width:100%;background:#4CC9F0;color:#021849">Prendre ma FC (15 s)</button>
 <div class="fr" style="margin-top:10px"><div class="f"><label>Pulsations comptées en 15 s</label><input type="number" id="fi2" min="0" inputmode="numeric"></div><div class="f"><label>Ou FC lue sur ma montre</label><input type="number" id="fd" min="0" inputmode="numeric"></div></div></div>
 <div class="card" id="fres"></div></section>
@@ -181,6 +193,7 @@ body{min-height:100vh;min-height:100dvh}
 <section class="sec sD"><h2>Mon entraînement</h2><div class="phs" id="ph3"><button data-s="1" class="on"><svg viewBox="0 0 24 24"><path d="M9 4h6v3H9zM7 5.5H5V21h14V5.5h-2M9 12h6M9 16h4"/></svg><span>Préparer</span></button><button data-s="2"><svg viewBox="0 0 24 24"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg><span>M'entraîner</span></button><button data-s="3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-7"/></svg><span>Faire le bilan</span></button></div><div id="sv"></div></section>
 <section class="sec sC"><h2>Carnet de suivi d'entraînement</h2><div id="lst"></div></section>
 </div>
+<div class="ibub" id="ibub" hidden role="dialog" aria-label="Installer l'application"><span id="ibt" style="flex:1"></span><button class="btn" id="ibi" style="display:none">Installer</button><button class="x" id="ibx" aria-label="Plus tard">×</button></div>
 <div class="ts" id="ts" role="status"></div>
 <p class="ft"><b style="color:#F2F6FF">© Muriel Barreau, CEDREPS, 2026</b><br>Licence <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr" target="_blank" rel="noopener" style="color:#9DB5FF">CC BY-NC 4.0</a> : réutilisation libre avec attribution, sans usage commercial.<br>Aucune donnée collectée : tout reste sur l'appareil.</p>
 </div>
@@ -327,7 +340,7 @@ function validate(){const x={};
  endSeance(x);refresh();tab("p5")}
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const FN=["SURBOOST","BOOST","STEADY","DIP","DRAIN"],REC=["Étirements","Jumping jacks","Corde à sauter","Pompes","Course","Burpees","Autre"];
-const fmtD=t=>{try{return new Date(t).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})}catch(e){return String(t).slice(0,16)}};
+const fmtD=t=>{try{return new Date(t).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short",timeZone:"Europe/Paris"})}catch(e){return String(t).slice(0,16)}};
 const newC=()=>({t:new Date().toISOString(),forme:null,ech:"",plan:[{m:"Chill",n:13,w:0,r:0,g:2,off:0},{m:"Turbo",n:6,w:30,r:30,g:2,off:0},{m:"Turbo",n:6,w:30,r:30,g:0,off:0}],ent:[0,1,2].map(()=>({fc:"",rpe:0,adj:""})),blocs:[["","","",""],["","","",""],["","","",""]],par:[0,1,2].map(()=>({h:"",imp:0,lest:"",bras:0,rec:[],pas:""})),bil:"",proch:"",chk:{},tq:[0,0,0,0,0]});
 let C=null,Sx=[],ph=1;const OPEN={};
 try{C=JSON.parse(localStorage.getItem("stepxp1:cur")||"null")}catch(e){}if(!C||!C.plan||!C.par||!C.ent||C.plan[0].g===undefined)C=newC();
@@ -352,7 +365,7 @@ function sview(){Q("#ph3 button").forEach(b=>b.classList.toggle("on",+b.dataset.
   h+='<p class="dim">Quand l\'effort perçu et la description de mes ressentis sont remplis pour chaque série, je passe à « Faire le bilan ».</p>';v.innerHTML=h;
   Q("#sv [data-e]").forEach(el=>el.oninput=()=>{const[i,k]=el.dataset.e.split(".");C.ent[+i][k]=el.value;saveC();if(k==="desc")el.classList.toggle("req",showReq&&!el.value.trim());if(k==="fc"){const t=verd(+i+1,+el.value),n=$("vd"+i);n.textContent=t;n.style.color=vcol(t)}});
   Q("#sv [data-g]").forEach(b=>b.onclick=()=>{const[,i]=b.dataset.g.split(".");C.ent[+i].rpe=+b.dataset.v;saveC();sview()});return}
- let h=`<div class="dt0">Entraînement du <b>${fmtD(C.t)}</b></div><h3 class="sh3"><span class="nb">1</span>Je me situe</h3><div class="card"><span class="lb" style="margin-top:0">Mon état de forme</span><div class="fm">${FN.map((n,i)=>`<button class="cp ${C.forme===i?"on":""}" data-f="${i}">${pips(5-i,"#9DB5FF")}<br>${n}</button>`).join("")}</div></div>
+ let h=`<div class="dt0">Entraînement du <b>${fmtD(new Date())}</b> <span class="dim">(heure de Paris)</span></div><h3 class="sh3"><span class="nb">1</span>Je me situe</h3><div class="card"><span class="lb" style="margin-top:0">Mon état de forme</span><div class="fm">${FN.map((n,i)=>`<button class="cp ${C.forme===i?"on":""}" data-f="${i}">${pips(5-i,"#9DB5FF")}<br>${n}</button>`).join("")}</div></div>
 <h3 class="sh3"><span class="nb">2</span>Je planifie mon entraînement</h3><div class="sub"><div class="subh">Mon échauffement</div><div class="subb"><textarea class="ta" id="ec" rows="2" placeholder="Exercices, durée…">${esc(C.ech)}</textarea></div></div><div class="sub"><div class="subh">Mon plan d'entraînement</div><div class="subb"><p class="dim">Je peux l'adapter à mon état de forme.</p>`;
  C.plan.forEach((p,i)=>{const t=p.m==="Chill",[a,b]=zt(i+1);h+=`<div class="card sc">${band(i,"")}<div class="scb"><span class="lb" style="margin-top:2px">Type de série</span>${["Chill","Turbo"].map(x=>`<button class="cp ${p.m===x?"on":""}" data-md="${i}.${x}">${x}</button>`).join("")}<span class="chip" style="margin-left:4px">Cible FC : ${a}–${b} bpm · effort ${t?"2/5":"4–5/5"}</span><div class="in2s" style="margin-top:6px">${t?nf(i,"n","Durée (min)",1,1,p.n):nf(i,"n","Répétitions",1,1,p.n)+nf(i,"w","Effort (s)",5,5,p.w)+nf(i,"r","Récup (s)",5,5,p.r)}${nf(i,"g","Récup après (min)",0,0.5,p.g)}</div>${C.plan.length>1?`<button class="btn" data-rm="${i}" style="margin-top:8px">Retirer cette série</button>`:""}</div></div>`});
  h+=`<div class="seg">${C.plan.length<5?'<button data-add="Chill">+ Une série Chill</button><button data-add="Turbo">+ Une série Turbo</button>':""}</div>`;
@@ -375,7 +388,7 @@ function sview(){Q("#ph3 button").forEach(b=>b.classList.toggle("on",+b.dataset.
 let showReq=false;
 const missEnt=()=>{const m=[];C.plan.forEach((p,i)=>{const e=C.ent[i];if(!e.rpe)m.push("l'effort perçu de la série "+(i+1));if(!String(e.desc||"").trim())m.push("la description de mes ressentis de la série "+(i+1))});return m};
 Q("#ph3 button").forEach(b=>b.onclick=()=>{const t=+b.dataset.s;if(t===3){const m=missEnt();if(m.length){showReq=true;ph=2;sview();toast("Pour faire le bilan, je remplis : "+m.slice(0,2).join(" et ")+(m.length>2?"…":""));return}}ph=t;sview()});
-function endSeance(x){C.bil=($("bt")||{}).value||C.bil;C.ent.forEach((e,i)=>{[e.lo,e.hi]=zt(i+1)});{const R={...C,x,id:Date.now()};delete R.chk;delete R.tq;Sx.push(R)}saveS();C=newC();showReq=false;saveC();ph=1;sview();lst();reset()}
+function endSeance(x){C.bil=($("bt")||{}).value||C.bil;C.t=new Date().toISOString();C.ent.forEach((e,i)=>{[e.lo,e.hi]=zt(i+1)});{const R={...C,x,id:Date.now()};delete R.chk;delete R.tq;Sx.push(R)}saveS();C=newC();showReq=false;saveC();ph=1;sview();lst();reset()}
 function sLines(s){const o=[],A=(k,t,x)=>o.push(Object.assign({k,t},x||{}));
  A("t","StepXP1 - Mon carnet de suivi d'entraînement",{u:"Élève : "+(who()||"non renseigné")+"   |   Séance du "+fmtD(s.t)});
  A("h","1 · JE ME SITUE");A("r","Mon état de forme",{v:s.forme!=null?FN[s.forme]:"-"});
@@ -437,7 +450,7 @@ const prm=st=>{if(!st.sn)return"";const p=C.par[st.sn-1];if(!p)return"";if(st.n=
 const rbuild=()=>{cmRender();if(!run){build(mode);idx=0;left=0;show()}};
 const goPh=n=>{ph=n;sview()};
 let fcSel=1,fcv=0,ftm=null;
-function fres(){if(fcSel>C.plan.length)fcSel=1;const[a,b]=zt(fcSel);$("fres").innerHTML=`<div class="seg wrap">${C.plan.map((_,k)=>k+1).map(n=>`<button class="${n===fcSel?"on":""}" data-n="${n}">Série ${n} · ${C.plan[n-1].m}</button>`).join("")}</div>`+(fcv>0?`<div class="big">${fcv} <small>bpm</small></div><p class="goal">${verd(fcSel,fcv)}</p><p class="dim">Cible série ${fcSel} : ${a}–${b} bpm (âge ${esc(S.age)} ans, FC repos ${esc(S.fc)}).</p><button class="btn" id="fsv" style="width:100%">Enregistrer pour la série ${fcSel}</button>`:'<p class="dim">Aucune mesure pour le moment.</p>');
+function fres(){if(fcSel>C.plan.length)fcSel=1;const[a,b]=zt(fcSel);$("fres").innerHTML=`<span class="lb" style="margin-top:0">Je choisis la série</span><div class="seg wrap">${C.plan.map((_,k)=>k+1).map(n=>`<button class="${n===fcSel?"on":""}" data-n="${n}" data-m="${C.plan[n-1].m.toLowerCase()}">Série ${n} · ${C.plan[n-1].m}</button>`).join("")}</div>`+(fcv>0?`<div class="big">${fcv} <small>bpm</small></div><p class="goal">${verd(fcSel,fcv)}</p><p class="dim">Cible série ${fcSel} : ${a}–${b} bpm (âge ${esc(S.age)} ans, FC repos ${esc(S.fc)}).</p><button class="btn" id="fsv" style="width:100%;background:#4CC9F0;color:#021849;border-color:#4CC9F0">Enregistrer pour la série ${fcSel}</button>`:'<p class="dim">Aucune mesure pour le moment.</p>');
  Q("#fres [data-n]").forEach(x=>x.onclick=()=>{fcSel=+x.dataset.n;fres()});
  if($("fsv"))$("fsv").onclick=()=>{C.ent[fcSel-1].fc=fcv;saveC();toast("FC enregistrée pour la série "+fcSel);if(ph===2&&$("p5").classList.contains("on"))sview()}}
 function fcPrompt(sn,last){fcSel=sn||fcSel;fres();$("fgo").classList.add("hl");toast("Série "+fcSel+" terminée : je prends ma FC"+(last?". Ensuite, mon bilan dans l'onglet Carnet.":""))}
@@ -446,7 +459,7 @@ $("fgo").onclick=()=>{$("fgo").classList.remove("hl");if(ftm){clearInterval(ftm)
  ftm=setInterval(()=>{const l=Math.ceil((e-Date.now())/1000);$("ft").textContent=Math.max(l,0);if(l<=0){clearInterval(ftm);ftm=null;beep(880,600);$("fgo").textContent="Prendre ma FC (15 s)";$("fi2").focus()}},200)};
 $("fi2").oninput=e=>{fcv=(+e.target.value||0)*4;$("fd").value="";fres()};
 $("fd").oninput=e=>{fcv=+e.target.value||0;$("fi2").value="";fres()};
-let dip=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();dip=e;$("ib").style.display="inline-block"});
+let dip=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();dip=e;$("ib").style.display="inline-block";setTimeout(ibShow,800)});addEventListener("appinstalled",()=>{$("ibub").hidden=true});
 $("ib").onclick=()=>{if(dip){dip.prompt();dip=null;$("ib").style.display="none"}};
 try{if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)$("inst").style.display="none"}catch(e){}
 try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
@@ -467,5 +480,16 @@ $("pn").oninput=e=>{S.pn=e.target.value;save();orbs(curO)};$("nm").oninput=e=>{S
 const isF=n=>n&&/^(INPUT|TEXTAREA|SELECT)$/.test(n.tagName)&&n.type!=="checkbox"&&n.type!=="file";
 addEventListener("focusin",e=>{if(isF(e.target))document.body.classList.add("kb")});
 addEventListener("focusout",()=>setTimeout(()=>{if(!isF(document.activeElement))document.body.classList.remove("kb")},200));
+const ibK="stepxp1:instl";
+function ibShow(){let st=false;try{st=matchMedia("(display-mode: standalone)").matches||navigator.standalone}catch(e){}if(st)return;let t=0;try{t=+localStorage.getItem(ibK)||0}catch(e){}if(Date.now()-t<6048e5)return;
+ if(dip){$("ibt").textContent="Installer StepXP1 sur mon téléphone pour l'utiliser sans connexion.";$("ibi").style.display="inline-block"}
+ else if(/iphone|ipad|ipod/i.test(navigator.userAgent)){$("ibt").textContent="Pour utiliser StepXP1 sans connexion : j'appuie sur Partager, puis sur « Sur l'écran d'accueil ».";$("ibi").style.display="none"}
+ else return;
+ $("ibub").hidden=false}
+$("ibx").onclick=()=>{$("ibub").hidden=true;try{localStorage.setItem(ibK,String(Date.now()))}catch(e){}};
+$("ibi").onclick=async()=>{if(dip){dip.prompt();try{await dip.userChoice}catch(e){}dip=null;$("ibub").hidden=true}};
+setTimeout(ibShow,2500);
+$("how").onclick=()=>{const p=$("hw");p.hidden=!p.hidden;$("how").setAttribute("aria-expanded",String(!p.hidden))};
+$("vig").onclick=()=>{const p=$("vw");p.hidden=!p.hidden;$("vig").setAttribute("aria-expanded",String(!p.hidden))};
 orbs(0);rview("chill");cmRender();build(mode);all();sview();lst();hist();fres();prof();
 </script></body></html>
